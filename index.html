@@ -91,7 +91,7 @@
             shadowGenerator.useBlurExponentialShadowMap = true;
             shadowGenerator.blurKernel = 32;
         
-            const model = await BABYLON.SceneLoader.ImportMeshAsync("", "", "dummy3.babylon", scene);
+        //    const model = await BABYLON.SceneLoader.ImportMeshAsync("", "", "dummy3.babylon", scene);
         
             var xr = await scene.createDefaultXRExperienceAsync({
                 uiOptions: {
@@ -118,7 +118,7 @@
             const marker = BABYLON.MeshBuilder.CreateTorus('marker', { diameter: 0.15, thickness: 0.05 });
             marker.isVisible = false;
             marker.rotationQuaternion = new BABYLON.Quaternion();
-        
+        /*
             var skeleton = model.skeletons[0];
         
             // ROBOT
@@ -133,7 +133,7 @@
             var leftRange = skeleton.getAnimationRange("YBot_LeftStrafeWalk");
             var rightRange = skeleton.getAnimationRange("YBot_RightStrafeWalk");
             scene.beginAnimation(skeleton, idleRange.from, idleRange.to, true);
-        
+        */
             let hitTest;
         
             b.isVisible = false;
