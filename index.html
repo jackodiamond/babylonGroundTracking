@@ -91,7 +91,7 @@
             shadowGenerator.useBlurExponentialShadowMap = true;
             shadowGenerator.blurKernel = 32;
         
-            const model = await BABYLON.SceneLoader.ImportMeshAsync("", "./scenes/", "dummy3.babylon", scene);
+            const model = await BABYLON.SceneLoader.ImportMeshAsync("", "./", "dummy3.babylon", scene);
         
             var xr = await scene.createDefaultXRExperienceAsync({
                 uiOptions: {
