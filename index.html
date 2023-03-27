@@ -85,6 +85,8 @@
         
             // Default intensity is 1. Let's dim the light a small amount
             light.intensity = 0.7;
+
+            var mesh1,mesh2;
         
             var dirLight = new BABYLON.DirectionalLight('light', new BABYLON.Vector3(0, -1, -0.5), scene);
             dirLight.position = new BABYLON.Vector3(0, 5, -5);
@@ -163,12 +165,11 @@
                 anchors.onAnchorAddedObservable.add(anchor => {
                     console.log('attaching', anchor);
                     b.isVisible = true;
-                    anchor.attachedNode = b.clone("mensch");
+                    anchor.attachedNode = mesh1.clone("mensch");
                     anchor.attachedNode.skeleton = skeleton.clone('skelet');
                     shadowGenerator.addShadowCaster(anchor.attachedNode, true);
                     scene.beginAnimation(anchor.attachedNode.skeleton, idleRange.from, idleRange.to, true);
                     b.isVisible = false;
-                    skeleton.isVisible=false;
                 })
         
                 anchors.onAnchorRemovedObservable.add(anchor => {
@@ -308,6 +309,7 @@
           break;
         case ShapeType.Cube:
           const cube = BABYLON.MeshBuilder.CreateBox('newCube', {}, this.scene);
+          mesh1 = cube;
           console.log('cube Added: ', cube)
           return cube;
           break;
