@@ -168,6 +168,7 @@
                     shadowGenerator.addShadowCaster(anchor.attachedNode, true);
                     scene.beginAnimation(anchor.attachedNode.skeleton, idleRange.from, idleRange.to, true);
                     b.isVisible = false;
+                    skeleton.isVisible=false;
                 })
         
                 anchors.onAnchorRemovedObservable.add(anchor => {
@@ -435,7 +436,7 @@
 
       function generatePreview() {
     console.log("Generate Preview code");
-    this.loadScene(1);
+  //  this.loadScene(1);
     
     
   }
