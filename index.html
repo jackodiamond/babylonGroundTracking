@@ -52,7 +52,9 @@
 
         var engine = null;
         var scene = null;
+        var scenes;
         var sceneToRender = null;
+        var currentSceneMeshes =[]; 
         var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
         /**
          * WebXR ar demo using hit-test, anchors, and plane detection.
@@ -91,6 +93,8 @@
             shadowGenerator.useBlurExponentialShadowMap = true;
             shadowGenerator.blurKernel = 32;
         
+            readJson();
+
             const model = await BABYLON.SceneLoader.ImportMeshAsync("", "", "dummy3.babylon", scene);
         
             var xr = await scene.createDefaultXRExperienceAsync({
@@ -256,14 +260,253 @@
         if (!engine) throw 'engine should not be null.';
         startRenderLoop(engine, canvas);
         window.scene = createScene();};
-        initFunction().then(() => {scene.then(returnedScene => { sceneToRender = returnedScene; });
-                            
+
+
+
+        initFunction().then(() => {scene.then(returnedScene => { sceneToRender = returnedScene; }); 
         });
+
+
+        function readJson(){
+    var data = '[{"id":0,"name":"newScene","meshObjects":[{"id":"0","name":"newGLTF","sceneId":1,"meshType":"cube","isLock":false,"position":{"x":2.033468008041382,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"scale":{"x":1,"y":-1,"z":1},"actions":0},{"id":"1","name":"newGLTF","sceneId":1,"meshType":"sphere","isLock":false,"position":{"x":-1.2087178230285645,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"scale":{"x":2.3395471572875977,"y":-1.9307323694229126,"z":2.346611738204956},"actions":2}]},{"id":1,"name":"newScene","meshObjects":[{"id":"6","name":"torus","sceneId":1,"meshType":"torus","isLock":false,"position":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"scale":{"x":1,"y":1,"z":1},"actions":0}]}]';
+    
+    
+    scenes = JSON.parse(data);
+
+    console.log("a mesh  "+JSON.stringify(scenes));
+
+        this.scenes.forEach(element => {
+      element.meshObjects.forEach(element => {
+        this.currentGLTFPosition = new BABYLON.Vector3(element.position?.x,element.position?.y,element.position?.z);
+        if(element.meshType!="gltf")
+        {
+        element.mesh= this.addSceneMesh(element.meshType, this.currentGLTFPosition);
+        console.log("z pos"+element.position?.z);
+        element.mesh.position = new BABYLON.Vector3(element.position?.x,element.position?.y,element.position?.z);
+        element.mesh.rotation = new BABYLON.Vector3(element.rotation?.x,element.rotation?.y,element.rotation?.z);
+        element.mesh.scaling = new BABYLON.Vector3(element.scale?.x,element.scale?.y,element.scale?.z);
+        element.mesh.setEnabled(false);
+        console.log("");
+        }else
+        {
+          this.addSceneMesh(element.meshType, this.currentGLTFPosition);
+        }
+      });
+    });
+    this.generatePreview();
+}
+
+
+
+      function addSceneMesh( meshType, position) {
+        console.log("mesh type : "+meshType);
+      switch (meshType) {
+        case ShapeType.Sphere:
+          const sphere = BABYLON.MeshBuilder.CreateSphere('newSphere', {}, this.scene);
+          return sphere;
+          break;
+        case ShapeType.Cube:
+          const cube = BABYLON.MeshBuilder.CreateBox('newCube', {}, this.scene);
+          console.log('cube Added: ', cube)
+          return cube;
+          break;
+        case ShapeType.Cylinder:
+          const cylinder = BABYLON.MeshBuilder.CreateCylinder('cylinder', {}, this.scene);
+          return cylinder
+          break;
+        case ShapeType.Cone:
+          const cone = BABYLON.MeshBuilder.CreateCylinder('cone', {}, this.scene);
+          console.log('cone Added: ', cone)
+          return cone;
+          break;
+        case ShapeType.Capsule:
+          const capsule = BABYLON.MeshBuilder.CreateCapsule('capsule', {}, this.scene);
+          console.log('capsule Added: ', capsule)
+          return capsule;
+          break;
+        case ShapeType.PolyheDron:
+          const polyhedron = BABYLON.MeshBuilder.CreatePolyhedron('polyhedron', {}, this.scene);
+          console.log('polyhedron Added: ', polyhedron)
+          return polyhedron;
+          break;
+        case ShapeType.GoldBerg:
+          const goldberg = BABYLON.MeshBuilder.CreateGoldberg('goldberg', {}, this.scene);
+          console.log('goldberg Added: ', goldberg)
+          return goldberg;
+          break;
+        case ShapeType.IcoSphere:
+          const icosphere = BABYLON.MeshBuilder.CreateIcoSphere('icosphere', {}, this.scene);
+          console.log('icosphere Added: ', icosphere)
+          return icosphere;
+          break;
+        case ShapeType.Torus:
+          const torus = BABYLON.MeshBuilder.CreateTorus('torus', {}, this.scene);
+          console.log('torus Added: ', torus)
+          return torus;
+          break;
+        case ShapeType.TorusKnot:
+          const torusKnot = BABYLON.MeshBuilder.CreateTorusKnot('torusKnot', {}, this.scene);
+          console.log('torusKnot Added: ', torusKnot)
+          return torusKnot;
+          break;
+        case ShapeType.GLTF:
+          var dummy ;
+          console.log("gltf to be added");
+          const gltfObject = BABYLON.SceneLoader.ImportMesh(
+            "",
+            "/assets/", "boy_running.gltf",
+            this.scene,
+            (meshes) => {
+             meshes[0].position = gltfPos;
+             dummy = this.getParentMesh(meshes[0]);
+             
+             console.log("gltf object loaded : "+dummy);
+            }
+          );
+
+          
+           // @ts-ignore
+        gltfObject.onMeshLoadedObservable.addOnce(meshData => {
+          
+          this.gltfObjects.push(this.getParentMesh(meshData));
+          console.log("waaat "+meshData);
+          meshData.setEnabled(false);
+          this.addGLTFMesh();
+        });
+         
+
+          break;
+        case ShapeType.Image:
+          var planeOpts = {
+            height: 5.4762,
+            width: 7.3967,
+            sideOrientation: Mesh.DOUBLESIDE
+          };
+          var Image = MeshBuilder.CreatePlane("plane", planeOpts, this.scene);
+          var pos = (new Vector3(0, 0, 0.1))
+          Image.position = pos;
+          // texture and material
+          var url = "http://upload.wikimedia.org/wikipedia/en/8/86/Einstein_tongue.jpg";
+          var mat = new StandardMaterial("mat1", this.scene);
+          //mat.backFaceCulling = false;
+          var texture = new Texture(url, this.scene);
+          mat.diffuseTexture = texture;
+    
+          Image.material = mat;
+          return Image;
+          break;
+        case ShapeType.Video:
+          var planeOpts = {
+            height: 5.4762,
+            width: 7.3967,
+            sideOrientation: Mesh.DOUBLESIDE
+          };
+          var Video = MeshBuilder.CreatePlane("plane", planeOpts, this.scene);
+          var vidPos = (new Vector3(0, 0, 0.1))
+          Video.position = vidPos;
+          var ANote0VideoMat = new StandardMaterial("m", this.scene);
+          var ANote0VideoVidTex = new VideoTexture("babylon", "assets/babylon.mp4", this.scene);
+          ANote0VideoMat.diffuseTexture = ANote0VideoVidTex;
+          ANote0VideoMat.roughness = 1;
+          ANote0VideoMat.emissiveColor = Color3.White();
+          Video.material = ANote0VideoMat;
+          this.scene.onPointerObservable.add(function (evt) {
+            if (evt.pickInfo?.pickedMesh === Video) {
+              //console.log("picked");
+              if (ANote0VideoVidTex.video.paused)
+                ANote0VideoVidTex.video.play();
+              else
+                ANote0VideoVidTex.video.pause();
+              console.log(ANote0VideoVidTex.video.paused ? "paused" : "playing");
+            }
+          }, PointerEventTypes.POINTERPICK);
+          return Video;
+          break;
+      }
+      console.log('Meshes List: ', this.currentSceneMeshes);
+      console.log('Get Object pos: ');
+       
+      
+      var dumm = new BABYLON.Mesh("dummy", this.scene);
+      return dumm;
+    }
+
+
+
+      function generatePreview() {
+    console.log("Generate Preview code");
+    this.loadScene(1);
+    
+    
+  }
+
+
+  function loadScene(index) {
+    console.log("index : "+index);
+    
+    this.enableSceneMesh(false);
+
+    if(this.scenes[index-1]!=null)
+    {
+      this.currentSceneMeshes = this.scenes[index-1].meshObjects;
+      this.enableSceneMesh(true);
+    }else
+    {
+      this.currentSceneMeshes=[];
+    }
+
+    this.sceneIndex=index-1;
+  }
+
+  function enableSceneMesh(value) 
+  {
+    let meshObj;
+    if(this.currentSceneMeshes)
+    {
+      for (meshObj of this.currentSceneMeshes) {
+        console.log("mesh name"+meshObj.name+value);
+        if(meshObj.mesh)
+        {
+          console.log("mesh exist");
+          meshObj.mesh.setEnabled(value);
+        }else
+        {
+          console.log("mesh doesnt exists");
+        }
+        
+      }
+    }
+  }
+
+
+
+
+
+
+
+
+
 
         // Resize
         window.addEventListener("resize", function () {
             engine.resize();
         });
+
+        const ShapeType ={
+  Sphere: 'sphere',
+  Cube : 'cube',
+  Cylinder : 'cylinder',
+  Cone : 'cone',
+  Capsule : 'capsule',
+  PolyheDron : 'polyhedron',
+  GoldBerg : 'goldberg',
+  IcoSphere : 'icosphere',
+  Torus : 'torus',
+  TorusKnot : 'torusKnot',
+  GLTF : 'gltf',
+  Video : 'Video',
+  Image : 'Image'
+}
     </script>
 </body>
 </html>
