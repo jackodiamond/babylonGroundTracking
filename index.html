@@ -70,6 +70,8 @@
         
             // This creates a basic Babylon Scene object (non-mesh)
             var scene = new BABYLON.Scene(engine);
+            
+            var tapCount =0;
         
             // This creates and positions a free camera (non-mesh)
             var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 1, -5), scene);
@@ -130,7 +132,10 @@
         
             xrTest.onHitTestResultObservable.add((results) => {
                 if (results.length) {
-                    marker.isVisible = true;
+                    if(tapCount==0)
+                    {
+                        marker.isVisible = true;
+                    }
                     hitTest = results[0];
                     hitTest.transformationMatrix.decompose(undefined, b.rotationQuaternion, b.position);
                     hitTest.transformationMatrix.decompose(undefined, marker.rotationQuaternion, marker.position);
@@ -167,7 +172,12 @@
         
             scene.onPointerDown = (evt, pickInfo) => {
                 if (hitTest && anchors && xr.baseExperience.state === BABYLON.WebXRState.IN_XR) {
-                    anchors.addAnchorPointUsingHitTestResultAsync(hitTest);
+                    if(tapCount==0)
+                    {
+                        anchors.addAnchorPointUsingHitTestResultAsync(hitTest);
+                        tapCount++;
+                        marker.isVisible=false;
+                    }
                 }
             }
         
