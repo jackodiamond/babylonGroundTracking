@@ -440,13 +440,13 @@
   function fillNodeMeshData() {
   for (let i = 0; i < scenes.length; i++) {
     let a = BABYLON.MeshBuilder.CreateCylinder('cylinder', { diameterBottom: 0, diameterTop: 0, height: 0.5 });
-    meshNodeData[i] = new BABYLON.MeshNode();
+    nodes[i] = new BABYLON.MeshNode();
   //  meshNodeData[i].addMesh(a);
     for (let meshObj of scenes) {
       console.log("mesh name" + meshObj.name);
       if (meshObj.mesh) {
         console.log("mesh exists");
-        meshNodeData[i].addMesh(meshObj.mesh);
+        nodes[i].addMesh(meshObj.mesh);
       }
     }
   }
