@@ -55,7 +55,7 @@
         var scenes;
         var sceneToRender = null;
         var currentSceneMeshes =[]; 
-        var nodes = [];
+        var meshNodeData = [];
         var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
         /**
          * WebXR ar demo using hit-test, anchors, and plane detection.
@@ -437,21 +437,23 @@
     
   }
 
-  function fillNodeMeshData() {
+
+function fillNodeMeshData() {
   for (let i = 0; i < scenes.length; i++) {
     let a = BABYLON.MeshBuilder.CreateCylinder('cylinder', { diameterBottom: 0, diameterTop: 0, height: 0.5 });
-    nodes[i] = new BABYLON.MeshNode();
-  //  meshNodeData[i].addMesh(a);
-    for (let meshObj of scenes) {
+    meshNodeData[i] = a;
+    for (let meshObj of scenes[i]) {
       console.log("mesh name" + meshObj.name);
       if (meshObj.mesh) {
         console.log("mesh exists");
-        nodes[i].addMesh(meshObj.mesh);
+        let meshCopy = meshObj.mesh.clone(meshObj.mesh.name + "_copy");
+        meshCopy.parent = a;
       }
     }
   }
   console.log("node mesh data filled!");
 }
+
 
   function loadScene(index) {
     console.log("index : "+index);
