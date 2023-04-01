@@ -154,12 +154,21 @@
                 console.log('anchors attached');
                 anchors.onAnchorAddedObservable.add(anchor => {
                     console.log('attaching', anchor);
-                    b.isVisible = true;
-                    anchor.attachedNode = b.clone("mensch");
+                   // b.isVisible = true;
+                    for(let i=0;i<meshNodeData.length;i++)
+                    {
+                      anchor.attachedNode = meshNodeData[i];
+                    }
+                    //anchor.attachedNode = b.clone("mensch");
                     
                     shadowGenerator.addShadowCaster(anchor.attachedNode, true);
-                    
-                    b.isVisible = false;
+
+                    //disable from scene 2
+                    for(let i=1;i<meshNodeData.length;i++)
+                    {
+                      meshNodeData[i].isVisible=false;
+                    }
+                   // b.isVisible = false;
                 })
         
                 anchors.onAnchorRemovedObservable.add(anchor => {
