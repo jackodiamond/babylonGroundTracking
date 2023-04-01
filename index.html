@@ -438,22 +438,20 @@
   }
 
   function fillNodeMeshData() {
-    for(let i=0;i<scenes.length;i++)
-    {
-      let a = BABYLON.CylinderBuilder.CreateCylinder('cylinder', { diameterBottom: 0, diameterTop: 0, height: 0.5 });
-      this.meshNodeData[i].add(a);
-       for (meshObj of this.scenes) {
-        console.log("mesh name"+meshObj.name+value);
-        if(meshObj.mesh)
-        {
-          console.log("mesh exist");
-          this.meshNodeData[i].add(meshObj.mesh);
-        }
-        
+  for (let i = 0; i < scenes.length; i++) {
+    let a = BABYLON.MeshBuilder.CreateCylinder('cylinder', { diameterBottom: 0, diameterTop: 0, height: 0.5 });
+    meshNodeData[i] = new BABYLON.MeshNode();
+    meshNodeData[i].addMesh(a);
+    for (let meshObj of scenes) {
+      console.log("mesh name" + meshObj.name);
+      if (meshObj.mesh) {
+        console.log("mesh exists");
+        meshNodeData[i].addMesh(meshObj.mesh);
       }
     }
-    console.log("node mesh data filled!");
   }
+  console.log("node mesh data filled!");
+}
 
   function loadScene(index) {
     console.log("index : "+index);
