@@ -157,12 +157,13 @@
                    // b.isVisible = true;
                     for(let i=0;i<meshNodeData.length;i++)
                     {
+                      console.log("aaa "+meshNodeData[i]);
                       anchor.attachedNode = meshNodeData[i];
                     }
                     //anchor.attachedNode = b.clone("mensch");
                     
                     shadowGenerator.addShadowCaster(anchor.attachedNode, true);
-
+                    meshNodeData[0].isVisible=true;
                     //disable from scene 2
                     for(let i=1;i<meshNodeData.length;i++)
                     {
