@@ -466,7 +466,7 @@ function fillNodeMeshData() {
         let meshCopy = meshObj.mesh.clone(meshObj.mesh.name + "_copy");
         meshCopy.position = new BABYLON.Vector3(0, 0, 0);
         meshCopy.parent = meshNodeData[i];
-        
+        meshObj.mesh.setEnabled(false);
       }
     }
       meshNodeData[i].isVisible=false;
