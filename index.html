@@ -157,13 +157,14 @@
                    // b.isVisible = true;
                     for(let i=0;i<meshNodeData.length;i++)
                     {
+                        meshNodeData[i].isVisible=true;
                       console.log("aaa "+meshNodeData[i]);
                       anchor.attachedNode = meshNodeData[i];
                     }
                     //anchor.attachedNode = b.clone("mensch");
                     
                     shadowGenerator.addShadowCaster(anchor.attachedNode, true);
-                    meshNodeData[0].isVisible=true;
+                   
                     //disable from scene 2
                     for(let i=1;i<meshNodeData.length;i++)
                     {
@@ -459,8 +460,10 @@ function fillNodeMeshData() {
         console.log("mesh exists");
         let meshCopy = meshObj.mesh.clone(meshObj.mesh.name + "_copy");
         meshCopy.parent = meshNodeData[i];
+        
       }
     }
+      meshNodeData[i].isVisible=false;
   }
   console.log("node mesh data filled!");
 }
