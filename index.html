@@ -463,7 +463,7 @@ function fillNodeMeshData() {
       if (meshObj.mesh) {
         console.log("mesh exists "+meshObj.mesh.name);
         let meshCopy = meshObj.mesh.clone(meshObj.mesh.name + "_copy");
-        meshCopy.Position = new Vector3(0, 0, 0);
+        meshCopy.position = new BABYLON.Vector3(0, 0, 0);
         meshCopy.parent = meshNodeData[i];
         
       }
