@@ -450,7 +450,7 @@
 
 function fillNodeMeshData() {
   for (let i = 0; i < scenes.length; i++) {
-    let a = BABYLON.MeshBuilder.CreateCylinder('cylinder', { diameterBottom: 0, diameterTop: 0, height: 0.5 });
+    let a = BABYLON.MeshBuilder.CreateCylinder('cylinder', { diameterBottom: 0.1, diameterTop: 0.1, height: 0.5 });
     meshNodeData[i] = a;
 
     for (let meshObj of scenes[i].meshObjects) {
@@ -458,7 +458,7 @@ function fillNodeMeshData() {
       if (meshObj.mesh) {
         console.log("mesh exists");
         let meshCopy = meshObj.mesh.clone(meshObj.mesh.name + "_copy");
-        meshCopy.parent = a;
+        meshCopy.parent = meshNodeData[i];
       }
     }
   }
