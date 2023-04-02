@@ -461,6 +461,7 @@ function fillNodeMeshData() {
     for (let meshObj of scenes[i].meshObjects) {
       console.log("mesh name" + meshObj.name);
       if (meshObj.mesh) {
+          meshObj.mesh.setEnabled(true);
         console.log("mesh exists "+meshObj.mesh.name);
         let meshCopy = meshObj.mesh.clone(meshObj.mesh.name + "_copy");
         meshCopy.position = new BABYLON.Vector3(0, 0, 0);
