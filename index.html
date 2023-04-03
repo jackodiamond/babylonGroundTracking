@@ -519,8 +519,9 @@ function fillNodeMeshData() {
                     console.log("aaaa "+i);
                     
                     const children = meshNodeData[i].getChildren();
-                    for (let i = 0; i < children.length; i++) {
-                        const child = children[i];
+                    for (let j = 0; j < children.length; j++) 
+                    {
+                        const child = children[j];
                         // Do something with each child node
                         child.isVisible=true;
                     }
@@ -532,14 +533,16 @@ function fillNodeMeshData() {
                     console.log("nnn "+i);
                     meshNodeData[i].isVisible = false;
                     const children = meshNodeData[i].getChildren();
-                    for (let i = 0; i < children.length; i++) {
-                        const child = children[i];
+                    for (let j = 0; j < children.length; j++) 
+                    {
+                        const child = children[j];
                         // Do something with each child node
                         child.isVisible=false;
                     }
                     meshNodeData[i].isVisible = false;
-           }
-       }
+                }
+            }
+        }
 
 
   function loadScene(index) {
