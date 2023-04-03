@@ -219,7 +219,7 @@
                         if(pickInfo.pickedMesh.name.includes(element.meshType))
                        {
                            console.log("go to scene "+element.actions);
-                           //loadScene(parseInt(element.action));
+                           loadSceneNew(parseInt(element.action));
                        }
                     });
                 });
@@ -503,6 +503,21 @@ function fillNodeMeshData() {
       meshNodeData[i].isVisible=false;
   }
   console.log("node mesh data filled!");
+}
+        
+        function loadSceneNew(index){
+    if(index==0)
+    {
+        return;
+    }
+
+   for(let i=0;i<meshNodeData.length;i++)
+   {
+        if(i==index-1)
+            meshNodeData[i].isVisible =true;
+        else
+            meshNodeData[i].isVisible = false
+   }
 }
 
 
