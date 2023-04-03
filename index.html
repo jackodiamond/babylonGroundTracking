@@ -506,19 +506,26 @@ function fillNodeMeshData() {
 }
         
         function loadSceneNew(index){
-    if(index==0)
-    {
-        return;
-    }
-
-   for(let i=0;i<meshNodeData.length;i++)
-   {
-        if(i==index-1)
-            meshNodeData[i].isVisible =true;
-        else
-            meshNodeData[i].isVisible = false
-   }
-}
+            if(index==0)
+            {
+                return;
+            }
+            
+            console.log("load scene 1");
+           for(let i=0;i<meshNodeData.length;i++)
+           {
+                if(i==index-1)
+                {
+                    console.log("aaaa "+i);
+                    meshNodeData[i].isVisible =true;
+                }
+                else
+                {
+                    console.log("nnn "+i);
+                    meshNodeData[i].isVisible = false;
+                }
+           }
+       }
 
 
   function loadScene(index) {
