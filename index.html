@@ -162,13 +162,19 @@
                 anchors.onAnchorAddedObservable.add(anchor => {
                     console.log('attaching', meshNodeData.length);
                     b.isVisible = true;
+                    /*
                     for(let i=0;i<meshNodeData.length;i++)
                     {
                         meshNodeData[i].isVisible=true;
                       console.log("aaa "+meshNodeData[i]);
                       anchor.attachedNode = meshNodeData[i];
                     }
+                    */
                     anchor.attachedNode = b;//b.clone("mensch");
+                    
+                    meshNodeData[0].isVisible=true;
+                    anchor.attachedNode = meshNodeData[0];
+                    
                     
                     const children = meshNodeData[0].getChildren();
                     for (let i = 0; i < children.length; i++) {
