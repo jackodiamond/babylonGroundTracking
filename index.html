@@ -217,7 +217,7 @@
                 element.meshObjects.forEach(element => {
                         if(pickInfo.pickedMesh.name.includes(element.meshType))
                        {
-                           console.log("go to scene "+element.action);
+                           console.log("go to scene "+element.actions);
                            //loadScene(parseInt(element.action));
                        }
                     });
@@ -341,11 +341,11 @@
         console.log("mesh type : "+meshType);
       switch (meshType) {
         case ShapeType.Sphere:
-          const sphere = BABYLON.MeshBuilder.CreateSphere('newSphere', {}, this.scene);
+          const sphere = BABYLON.MeshBuilder.CreateSphere('sphere', {}, this.scene);
           return sphere;
           break;
         case ShapeType.Cube:
-          const cube = BABYLON.MeshBuilder.CreateBox('newCube', {}, this.scene);
+          const cube = BABYLON.MeshBuilder.CreateBox('cube', {}, this.scene);
           console.log('cube Added: ', cube)
           return cube;
           break;
