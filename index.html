@@ -145,7 +145,7 @@
                     }
                     */
                     hitTest.transformationMatrix.decompose(undefined, meshNodeData[0].rotationQuaternion, meshNodeData[0].position);
-                  //  hitTest.transformationMatrix.decompose(undefined, b.rotationQuaternion, b.position);
+                    hitTest.transformationMatrix.decompose(undefined, b.rotationQuaternion, b.position);
                     hitTest.transformationMatrix.decompose(undefined, marker.rotationQuaternion, marker.position);
                 } else {
                     marker.isVisible = false;
@@ -161,7 +161,7 @@
                 console.log('anchors attached');
                 anchors.onAnchorAddedObservable.add(anchor => {
                     console.log('attaching', meshNodeData.length);
-                   // b.isVisible = true;
+                    b.isVisible = true;
                     for(let i=0;i<meshNodeData.length;i++)
                     {
                         meshNodeData[i].isVisible=true;
