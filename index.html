@@ -174,8 +174,8 @@
                  //   anchor.attachedNode = b;//b.clone("mensch");
                     
                     meshNodeData[0].isVisible=true;
-                  //  anchor.attachedNode = meshNodeData[0];
-                    anchor.attachedNode = meshParent;
+                    anchor.attachedNode = meshNodeData[0];
+                 
                     
                     const children = meshNodeData[0].getChildren();
                     for (let i = 0; i < children.length; i++) {
@@ -498,7 +498,7 @@ function fillNodeMeshData() {
         meshCopy.isVisible=false;
       }
     }
-      meshNodeData[i].parent = meshParent;
+   //   meshNodeData[i].parent = meshParent;
       meshNodeData[i].isVisible=false;
   }
   console.log("node mesh data filled!");
