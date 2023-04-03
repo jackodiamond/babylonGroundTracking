@@ -517,13 +517,27 @@ function fillNodeMeshData() {
                 if(i==index-1)
                 {
                     console.log("aaaa "+i);
+                    
+                    const children = meshNodeData[i].getChildren();
+                    for (let i = 0; i < children.length; i++) {
+                        const child = children[i];
+                        // Do something with each child node
+                        child.isVisible=true;
+                    }
                     meshNodeData[i].isVisible =true;
+                   
                 }
                 else
                 {
                     console.log("nnn "+i);
                     meshNodeData[i].isVisible = false;
-                }
+                    const children = meshNodeData[i].getChildren();
+                    for (let i = 0; i < children.length; i++) {
+                        const child = children[i];
+                        // Do something with each child node
+                        child.isVisible=false;
+                    }
+                    meshNodeData[i].isVisible = false;
            }
        }
 
