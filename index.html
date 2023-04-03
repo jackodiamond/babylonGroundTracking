@@ -56,6 +56,7 @@
         var sceneToRender = null;
         var currentSceneMeshes =[]; 
         var meshNodeData = [];
+        var meshParent;
         var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
         /**
          * WebXR ar demo using hit-test, anchors, and plane detection.
@@ -173,8 +174,8 @@
                  //   anchor.attachedNode = b;//b.clone("mensch");
                     
                     meshNodeData[0].isVisible=true;
-                    anchor.attachedNode = meshNodeData[0];
-                    
+                  //  anchor.attachedNode = meshNodeData[0];
+                    anchor.attachedNode = meshParent;
                     
                     const children = meshNodeData[0].getChildren();
                     for (let i = 0; i < children.length; i++) {
@@ -497,6 +498,7 @@ function fillNodeMeshData() {
         meshCopy.isVisible=false;
       }
     }
+      meshNodeData[i].parent = meshParent;
       meshNodeData[i].isVisible=false;
   }
   console.log("node mesh data filled!");
