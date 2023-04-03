@@ -174,8 +174,8 @@
                  //   anchor.attachedNode = b;//b.clone("mensch");
                     
                     meshNodeData[0].isVisible=true;
-                    anchor.attachedNode = meshNodeData[0];
-                 
+                 //   anchor.attachedNode = meshNodeData[0];
+                    anchor.attachedNode = meshParent;
                     
                     const children = meshNodeData[0].getChildren();
                     for (let i = 0; i < children.length; i++) {
@@ -482,6 +482,7 @@
 
 
 function fillNodeMeshData() {
+    meshParent = BABYLON.MeshBuilder.CreateCylinder('cylinder', { diameterBottom: 0, diameterTop: 0, height: 0.5 });
   for (let i = 0; i < scenes.length; i++) {
     let a = BABYLON.MeshBuilder.CreateCylinder('cylinder', { diameterBottom: 0.1, diameterTop: 0.1, height: 0.5 });
     meshNodeData[i] = a;
@@ -498,7 +499,7 @@ function fillNodeMeshData() {
         meshCopy.isVisible=false;
       }
     }
-   //   meshNodeData[i].parent = meshParent;
+      meshNodeData[i].parent = meshParent;
       meshNodeData[i].isVisible=false;
   }
   console.log("node mesh data filled!");
