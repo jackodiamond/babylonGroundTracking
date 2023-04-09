@@ -484,7 +484,7 @@
 function fillNodeMeshData() {
     meshParent = BABYLON.MeshBuilder.CreateCylinder('cylinder', { diameterBottom: 0, diameterTop: 0, height: 0.5 });
   for (let i = 0; i < scenes.length; i++) {
-    let a = BABYLON.MeshBuilder.CreateCylinder('cylinder', { diameterBottom: 0.1, diameterTop: 0.1, height: 0.5 });
+    let a = BABYLON.MeshBuilder.CreateCylinder('cylinder', { diameterBottom: 0, diameterTop: 0, height: 0.5 });
     meshNodeData[i] = a;
 
     for (let meshObj of scenes[i].meshObjects) {
