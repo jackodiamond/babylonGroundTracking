@@ -442,7 +442,7 @@
             sideOrientation: BABYLON.Mesh.DOUBLESIDE
           };
           var Video = BABYLON.MeshBuilder.CreatePlane("plane", planeOpts, this.scene);
-          var vidPos = (new Vector3(0, 0, 0.1))
+          var vidPos = (new BABYLON.Vector3(0, 0, 0.1))
           Video.position = vidPos;
           var ANote0VideoMat = new BABYLON.StandardMaterial("m", this.scene);
           var ANote0VideoVidTex = new BABYLON.VideoTexture("babylon", "assets/babylon.mp4", this.scene);
