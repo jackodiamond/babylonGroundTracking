@@ -422,14 +422,14 @@
             width: 7.3967,
             sideOrientation: BABYLON.Mesh.DOUBLESIDE
           };
-          var Image = MeshBuilder.CreatePlane("plane", planeOpts, this.scene);
-          var pos = (new Vector3(0, 0, 0.1))
+          var Image = BABYLON.MeshBuilder.CreatePlane("plane", planeOpts, this.scene);
+          var pos = (new BABYLON.Vector3(0, 0, 0.1))
           Image.position = pos;
           // texture and material
           var url = "http://upload.wikimedia.org/wikipedia/en/8/86/Einstein_tongue.jpg";
-          var mat = new StandardMaterial("mat1", this.scene);
+          var mat = new BABYLON.StandardMaterial("mat1", this.scene);
           //mat.backFaceCulling = false;
-          var texture = new Texture(url, this.scene);
+          var texture = new BABYLON.Texture(url, this.scene);
           mat.diffuseTexture = texture;
     
           Image.material = mat;
@@ -439,9 +439,9 @@
           var planeOpts = {
             height: 5.4762,
             width: 7.3967,
-            sideOrientation: Mesh.DOUBLESIDE
+            sideOrientation: BABYLON.Mesh.DOUBLESIDE
           };
-          var Video = MeshBuilder.CreatePlane("plane", planeOpts, this.scene);
+          var Video = BABYLON.MeshBuilder.CreatePlane("plane", planeOpts, this.scene);
           var vidPos = (new Vector3(0, 0, 0.1))
           Video.position = vidPos;
           var ANote0VideoMat = new StandardMaterial("m", this.scene);
