@@ -308,7 +308,7 @@
 
 
         function readJson(){
-    var data = '[{"id":0,"name":"newScene","meshObjects":[{"id":"0","name":"newGLTF","sceneId":1,"meshType":"Image","isLock":false,"position":{"x":2.033468008041382,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"scale":{"x":1,"y":-1,"z":1},"actions":0},{"id":"1","name":"newGLTF","sceneId":1,"meshType":"capsule","isLock":false,"position":{"x":-1.2087178230285645,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"scale":{"x":2.3395471572875977,"y":-1.9307323694229126,"z":2.346611738204956},"actions":2}]},{"id":1,"name":"newScene","meshObjects":[{"id":"6","name":"torus","sceneId":1,"meshType":"torus","isLock":false,"position":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"scale":{"x":1,"y":1,"z":1},"actions":0}]}]';
+    var data = '[{"id":0,"name":"newScene","meshObjects":[{"id":"0","name":"newGLTF","sceneId":1,"meshType":"Video","isLock":false,"position":{"x":2.033468008041382,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"scale":{"x":1,"y":-1,"z":1},"actions":0},{"id":"1","name":"newGLTF","sceneId":1,"meshType":"capsule","isLock":false,"position":{"x":-1.2087178230285645,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"scale":{"x":2.3395471572875977,"y":-1.9307323694229126,"z":2.346611738204956},"actions":2}]},{"id":1,"name":"newScene","meshObjects":[{"id":"6","name":"torus","sceneId":1,"meshType":"torus","isLock":false,"position":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"scale":{"x":1,"y":1,"z":1},"actions":0}]}]';
     
     
     scenes = JSON.parse(data);
@@ -444,11 +444,11 @@
           var Video = BABYLON.MeshBuilder.CreatePlane("plane", planeOpts, this.scene);
           var vidPos = (new Vector3(0, 0, 0.1))
           Video.position = vidPos;
-          var ANote0VideoMat = new StandardMaterial("m", this.scene);
-          var ANote0VideoVidTex = new VideoTexture("babylon", "assets/babylon.mp4", this.scene);
+          var ANote0VideoMat = new BABYLON.StandardMaterial("m", this.scene);
+          var ANote0VideoVidTex = new BABYLON.VideoTexture("babylon", "assets/babylon.mp4", this.scene);
           ANote0VideoMat.diffuseTexture = ANote0VideoVidTex;
           ANote0VideoMat.roughness = 1;
-          ANote0VideoMat.emissiveColor = Color3.White();
+          ANote0VideoMat.emissiveColor = BABYLON.Color3.White();
           Video.material = ANote0VideoMat;
           this.scene.onPointerObservable.add(function (evt) {
             if (evt.pickInfo?.pickedMesh === Video) {
