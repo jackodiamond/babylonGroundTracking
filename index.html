@@ -450,6 +450,8 @@
           ANote0VideoMat.roughness = 1;
           ANote0VideoMat.emissiveColor = BABYLON.Color3.White();
           Video.material = ANote0VideoMat;
+           ANote0VideoVidTex.video.play();
+              /*
           this.scene.onPointerObservable.add(function (evt) {
             if (evt.pickInfo?.pickedMesh === Video) {
               //console.log("picked");
@@ -460,6 +462,7 @@
               console.log(ANote0VideoVidTex.video.paused ? "paused" : "playing");
             }
           }, PointerEventTypes.POINTERPICK);
+          */
           return Video;
           break;
       }
