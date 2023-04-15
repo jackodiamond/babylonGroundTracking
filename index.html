@@ -344,7 +344,7 @@
          
               const torusKnott = BABYLON.MeshBuilder.CreateTorusKnot('torusKnott', {}, this.scene);
               console.log("add");
-          const gltfObject = await BABYLON.SceneLoader.ImportMesh(
+          const gltfObject = BABYLON.SceneLoader.ImportMesh(
             "",
             "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Box/glTF/", "Box.gltf",
             sceneTwo,
