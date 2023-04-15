@@ -335,6 +335,36 @@
     });
     this.generatePreview();
 }
+        
+     async function loadgltf(){
+              var dummy ;
+          console.log("gltf to be added");
+              const torusKnott = BABYLON.MeshBuilder.CreateTorusKnot('torusKnott', {}, this.scene);
+              console.log("add");
+          const gltfObject = await BABYLON.SceneLoader.ImportMeshAsync(
+            "",
+            "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Box/glTF/", "Box.gltf",
+            this.scene,
+            (meshes) => {
+          //   meshes[0].position = gltfPos;
+          //   dummy = this.getParentMesh(meshes[0]);
+             
+             console.log("gltf object loaded : ");
+            }
+          );
+
+          /*
+           // @ts-ignore
+        gltfObject.onMeshLoadedObservable.addOnce(meshData => {
+          
+       //   this.gltfObjects.push(this.getParentMesh(meshData));
+          console.log("waaat "+meshData);
+      //    meshData.setEnabled(false);
+     //     this.addGLTFMesh();
+        });
+         */
+
+        }
 
 
 
@@ -390,33 +420,7 @@
           return torusKnot;
           break;
         case ShapeType.GLTF:
-          var dummy ;
-          console.log("gltf to be added");
-              const torusKnott = BABYLON.MeshBuilder.CreateTorusKnot('torusKnott', {}, this.scene);
-              console.log("add");
-          const gltfObject = await BABYLON.SceneLoader.ImportMeshAsync(
-            "",
-            "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Box/glTF/", "Box.gltf",
-            this.scene,
-            (meshes) => {
-          //   meshes[0].position = gltfPos;
-          //   dummy = this.getParentMesh(meshes[0]);
-             
-             console.log("gltf object loaded : ");
-            }
-          );
-
-          /*
-           // @ts-ignore
-        gltfObject.onMeshLoadedObservable.addOnce(meshData => {
-          
-       //   this.gltfObjects.push(this.getParentMesh(meshData));
-          console.log("waaat "+meshData);
-      //    meshData.setEnabled(false);
-     //     this.addGLTFMesh();
-        });
-         */
-
+            this.loadgltf();
           break;
         case ShapeType.Image:
           var planeOpts = {
