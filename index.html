@@ -40,6 +40,23 @@
 <body>
     <canvas id="renderCanvas"></canvas>
     <script>
+        
+        const ShapeType ={
+          Sphere: 'sphere',
+          Cube : 'cube',
+          Cylinder : 'cylinder',
+          Cone : 'cone',
+          Capsule : 'capsule',
+          PolyheDron : 'polyhedron',
+          GoldBerg : 'goldberg',
+          IcoSphere : 'icosphere',
+          Torus : 'torus',
+          TorusKnot : 'torusKnot',
+          GLTF : 'gltf',
+          Video : 'Video',
+          Image : 'Image'
+        }
+                
         var canvas = document.getElementById("renderCanvas");
 
         var startRenderLoop = function (engine, canvas) {
@@ -608,21 +625,7 @@ function fillNodeMeshData() {
             engine.resize();
         });
 
-        const ShapeType ={
-  Sphere: 'sphere',
-  Cube : 'cube',
-  Cylinder : 'cylinder',
-  Cone : 'cone',
-  Capsule : 'capsule',
-  PolyheDron : 'polyhedron',
-  GoldBerg : 'goldberg',
-  IcoSphere : 'icosphere',
-  Torus : 'torus',
-  TorusKnot : 'torusKnot',
-  GLTF : 'gltf',
-  Video : 'Video',
-  Image : 'Image'
-}
+
     </script>
 </body>
 </html>
