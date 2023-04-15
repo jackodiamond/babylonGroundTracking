@@ -394,13 +394,13 @@
           console.log("gltf to be added");
           const gltfObject = BABYLON.SceneLoader.ImportMesh(
             "",
-            "", "boy_running.gltf",
+            "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Box/glTF/", "Box.gltf",
             this.scene,
             (meshes) => {
-             meshes[0].position = gltfPos;
-             dummy = this.getParentMesh(meshes[0]);
+          //   meshes[0].position = gltfPos;
+          //   dummy = this.getParentMesh(meshes[0]);
              
-             console.log("gltf object loaded : "+dummy);
+             console.log("gltf object loaded : ");
             }
           );
 
@@ -408,10 +408,10 @@
            // @ts-ignore
         gltfObject.onMeshLoadedObservable.addOnce(meshData => {
           
-          this.gltfObjects.push(this.getParentMesh(meshData));
+       //   this.gltfObjects.push(this.getParentMesh(meshData));
           console.log("waaat "+meshData);
-          meshData.setEnabled(false);
-          this.addGLTFMesh();
+      //    meshData.setEnabled(false);
+     //     this.addGLTFMesh();
         });
          
 
@@ -420,16 +420,16 @@
           var planeOpts = {
             height: 5.4762,
             width: 7.3967,
-            sideOrientation: Mesh.DOUBLESIDE
+            sideOrientation: BABYLON.Mesh.DOUBLESIDE
           };
-          var Image = MeshBuilder.CreatePlane("plane", planeOpts, this.scene);
-          var pos = (new Vector3(0, 0, 0.1))
+          var Image = BABYLON.MeshBuilder.CreatePlane("plane", planeOpts, this.scene);
+          var pos = (new BABYLON.Vector3(0, 0, 0.1))
           Image.position = pos;
           // texture and material
           var url = "http://upload.wikimedia.org/wikipedia/en/8/86/Einstein_tongue.jpg";
-          var mat = new StandardMaterial("mat1", this.scene);
+          var mat = new BABYLON.StandardMaterial("mat1", this.scene);
           //mat.backFaceCulling = false;
-          var texture = new Texture(url, this.scene);
+          var texture = new BABYLON.Texture(url, this.scene);
           mat.diffuseTexture = texture;
     
           Image.material = mat;
@@ -439,17 +439,19 @@
           var planeOpts = {
             height: 5.4762,
             width: 7.3967,
-            sideOrientation: Mesh.DOUBLESIDE
+            sideOrientation: BABYLON.Mesh.DOUBLESIDE
           };
-          var Video = MeshBuilder.CreatePlane("plane", planeOpts, this.scene);
-          var vidPos = (new Vector3(0, 0, 0.1))
+          var Video = BABYLON.MeshBuilder.CreatePlane("plane", planeOpts, this.scene);
+          var vidPos = (new BABYLON.Vector3(0, 0, 0.1))
           Video.position = vidPos;
-          var ANote0VideoMat = new StandardMaterial("m", this.scene);
-          var ANote0VideoVidTex = new VideoTexture("babylon", "assets/babylon.mp4", this.scene);
+          var ANote0VideoMat = new BABYLON.StandardMaterial("m", this.scene);
+          var ANote0VideoVidTex = new BABYLON.VideoTexture("babylon", "assets/babylon.mp4", this.scene);
           ANote0VideoMat.diffuseTexture = ANote0VideoVidTex;
           ANote0VideoMat.roughness = 1;
-          ANote0VideoMat.emissiveColor = Color3.White();
+          ANote0VideoMat.emissiveColor = BABYLON.Color3.White();
           Video.material = ANote0VideoMat;
+          // ANote0VideoVidTex.video.play();
+              /*
           this.scene.onPointerObservable.add(function (evt) {
             if (evt.pickInfo?.pickedMesh === Video) {
               //console.log("picked");
@@ -460,6 +462,7 @@
               console.log(ANote0VideoVidTex.video.paused ? "paused" : "playing");
             }
           }, PointerEventTypes.POINTERPICK);
+          */
           return Video;
           break;
       }
