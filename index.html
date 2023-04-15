@@ -52,6 +52,7 @@
 
         var engine = null;
         var scene = null;
+        var sceneTwo;
         var scenes;
         var sceneToRender = null;
         var currentSceneMeshes =[]; 
@@ -72,7 +73,7 @@
         
             // This creates a basic Babylon Scene object (non-mesh)
             var scene = new BABYLON.Scene(engine);
-            
+            this.sceneTwo=scene;
             var tapCount =0;
         
             // This creates and positions a free camera (non-mesh)
@@ -360,7 +361,7 @@
           const gltfObject = BABYLON.SceneLoader.ImportMesh(
             "",
             "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Box/glTF/", "Box.gltf",
-            this.scene,
+            this.sceneTwo,
             (meshes) => {
           //   meshes[0].position = gltfPos;
           //   dummy = this.getParentMesh(meshes[0]);
@@ -436,7 +437,7 @@
           return torusKnot;
           break;
         case ShapeType.GLTF:
-          //  this.loadgltf();
+            this.loadgltf();
           break;
         case ShapeType.Image:
           var planeOpts = {
