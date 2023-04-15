@@ -40,23 +40,6 @@
 <body>
     <canvas id="renderCanvas"></canvas>
     <script>
-        
-        const ShapeType ={
-          Sphere: 'sphere',
-          Cube : 'cube',
-          Cylinder : 'cylinder',
-          Cone : 'cone',
-          Capsule : 'capsule',
-          PolyheDron : 'polyhedron',
-          GoldBerg : 'goldberg',
-          IcoSphere : 'icosphere',
-          Torus : 'torus',
-          TorusKnot : 'torusKnot',
-          GLTF : 'gltf',
-          Video : 'Video',
-          Image : 'Image'
-        }
-                
         var canvas = document.getElementById("renderCanvas");
 
         var startRenderLoop = function (engine, canvas) {
@@ -113,8 +96,21 @@
             var shadowGenerator = new BABYLON.ShadowGenerator(1024, dirLight);
             shadowGenerator.useBlurExponentialShadowMap = true;
             shadowGenerator.blurKernel = 32;
+            
+            console.log("add");
+          const gltfObject = BABYLON.SceneLoader.ImportMesh(
+            "",
+            "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Box/glTF/", "Box.gltf",
+            this.scene,
+            (meshes) => {
+          //   meshes[0].position = gltfPos;
+          //   dummy = this.getParentMesh(meshes[0]);
+             
+             console.log("gltf object loaded : ");
+            }
+          );
         
-          //  readJson();
+            readJson();
 
            // const model = await BABYLON.SceneLoader.ImportMeshAsync("", "", "dummy3.babylon", scene);
         
@@ -318,7 +314,7 @@
         startRenderLoop(engine, canvas);
         window.scene = createScene();};
 
-        readJson();
+
 
         initFunction().then(() => {scene.then(returnedScene => { sceneToRender = returnedScene; }); 
         });
@@ -625,7 +621,21 @@ function fillNodeMeshData() {
             engine.resize();
         });
 
-
+        const ShapeType ={
+  Sphere: 'sphere',
+  Cube : 'cube',
+  Cylinder : 'cylinder',
+  Cone : 'cone',
+  Capsule : 'capsule',
+  PolyheDron : 'polyhedron',
+  GoldBerg : 'goldberg',
+  IcoSphere : 'icosphere',
+  Torus : 'torus',
+  TorusKnot : 'torusKnot',
+  GLTF : 'gltf',
+  Video : 'Video',
+  Image : 'Image'
+}
     </script>
 </body>
 </html>
