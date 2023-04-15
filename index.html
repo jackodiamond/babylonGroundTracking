@@ -336,19 +336,15 @@
     this.generatePreview();
 }
         
-     async function loadgltf(){
+      function loadgltf(){
               var dummy ;
-         //    var sceneTwo = new BABYLON.Scene(engine);
+             var sceneTwo = new BABYLON.Scene(engine);
           console.log("gltf to be added");
          
-            this.scene.executeWhenReady(function () {
-    // Your code that uses the fully initialized Scene goes here
-                console.log("scene is ready");
-});
          
               const torusKnott = BABYLON.MeshBuilder.CreateTorusKnot('torusKnott', {}, this.scene);
               console.log("add");
-          const gltfObject = await BABYLON.SceneLoader.ImportMeshAsync(
+          const gltfObject = await BABYLON.SceneLoader.ImportMesh(
             "",
             "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Box/glTF/", "Box.gltf",
             sceneTwo,
