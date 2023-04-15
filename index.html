@@ -392,6 +392,8 @@
         case ShapeType.GLTF:
           var dummy ;
           console.log("gltf to be added");
+              const torusKnot = BABYLON.MeshBuilder.CreateTorusKnot('torusKnot', {}, this.scene);
+              console.log("add");
           const gltfObject = BABYLON.SceneLoader.ImportMeshAsync(
             "",
             "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Box/glTF/", "Box.gltf",
