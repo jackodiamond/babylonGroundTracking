@@ -322,7 +322,7 @@
 
 
         function readJson(){
-    var data = '[{"id":0,"name":"newScene","meshObjects":[{"id":"0","name":"newGLTF","sceneId":1,"meshType":"cube","isLock":false,"position":{"x":2.033468008041382,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"scale":{"x":1,"y":-1,"z":1},"actions":0},{"id":"1","name":"newGLTF","sceneId":1,"meshType":"capsule","isLock":false,"position":{"x":-1.2087178230285645,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"scale":{"x":2.3395471572875977,"y":-1.9307323694229126,"z":2.346611738204956},"actions":2}]},{"id":1,"name":"newScene","meshObjects":[{"id":"6","name":"torus","sceneId":1,"meshType":"gltf","isLock":false,"position":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"scale":{"x":1,"y":1,"z":1},"actions":0}]}]';
+    var data = '[{"id":0,"name":"newScene","meshObjects":[{"id":"0","name":"newGLTF","sceneId":1,"meshType":"gltf","isLock":false,"position":{"x":2.033468008041382,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"scale":{"x":1,"y":-1,"z":1},"actions":0},{"id":"1","name":"newGLTF","sceneId":1,"meshType":"capsule","isLock":false,"position":{"x":-1.2087178230285645,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"scale":{"x":2.3395471572875977,"y":-1.9307323694229126,"z":2.346611738204956},"actions":2}]},{"id":1,"name":"newScene","meshObjects":[{"id":"6","name":"torus","sceneId":1,"meshType":"torus","isLock":false,"position":{"x":0,"y":0,"z":0},"rotation":{"x":0,"y":0,"z":0},"scale":{"x":1,"y":1,"z":1},"actions":0}]}]';
     
     
     scenes = JSON.parse(data);
@@ -363,23 +363,23 @@
             "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Box/glTF/", "Box.gltf",
             this.sceneTwo,
             (meshes) => {
-          //   meshes[0].position = gltfPos;
-          //   dummy = this.getParentMesh(meshes[0]);
+             meshes[0].position = gltfPos;
+             dummy = this.getParentMesh(meshes[0]);
              
              console.log("gltf object loaded : ");
             }
           );
 
-          /*
+          
            // @ts-ignore
         gltfObject.onMeshLoadedObservable.addOnce(meshData => {
           
-       //   this.gltfObjects.push(this.getParentMesh(meshData));
+          this.gltfObjects.push(this.getParentMesh(meshData));
           console.log("waaat "+meshData);
-      //    meshData.setEnabled(false);
-     //     this.addGLTFMesh();
+          meshData.setEnabled(false);
+          this.addGLTFMesh();
         });
-         */
+         
 
         }
 
