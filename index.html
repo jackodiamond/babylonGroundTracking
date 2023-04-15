@@ -96,6 +96,19 @@
             var shadowGenerator = new BABYLON.ShadowGenerator(1024, dirLight);
             shadowGenerator.useBlurExponentialShadowMap = true;
             shadowGenerator.blurKernel = 32;
+            
+            console.log("add");
+          const gltfObject = BABYLON.SceneLoader.ImportMesh(
+            "",
+            "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Box/glTF/", "Box.gltf",
+            this.scene,
+            (meshes) => {
+          //   meshes[0].position = gltfPos;
+          //   dummy = this.getParentMesh(meshes[0]);
+             
+             console.log("gltf object loaded : ");
+            }
+          );
         
             readJson();
 
@@ -342,7 +355,7 @@
           console.log("gltf to be added");
          
          
-              const torusKnott = BABYLON.MeshBuilder.CreateTorusKnot('torusKnott', {}, this.scene);
+
               console.log("add");
           const gltfObject = BABYLON.SceneLoader.ImportMesh(
             "",
