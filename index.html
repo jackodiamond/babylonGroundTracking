@@ -351,35 +351,7 @@
 }
         
       function loadgltf(){
-              var dummy ;
-             var sceneTwo = new BABYLON.Scene(engine);
-          console.log("gltf to be added");
-         
-         
 
-              console.log("add");
-          const gltfObject = BABYLON.SceneLoader.ImportMesh(
-            "",
-            "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Box/glTF/", "Box.gltf",
-            this.sceneTwo,
-            (meshes) => {
-           //  meshes[0].position = gltfPos;
-           //  dummy = this.getParentMesh(meshes[0]);
-             
-             console.log("gltf object loaded : ");
-            }
-          );
-
-          /*
-           // @ts-ignore
-        gltfObject.onMeshLoadedObservable.addOnce(meshData => {
-          
-      //    this.gltfObjects.push(this.getParentMesh(meshData));
-          console.log("waaat "+meshData);
-          meshData.setEnabled(false);
-          this.addGLTFMesh();
-        });
-         */
 
         }
 
@@ -437,7 +409,35 @@
           return torusKnot;
           break;
         case ShapeType.GLTF:
-            this.loadgltf();
+              var dummy ;
+             var sceneTwo = new BABYLON.Scene(engine);
+          console.log("gltf to be added");
+         
+         
+
+              console.log("add");
+          const gltfObject = BABYLON.SceneLoader.ImportMesh(
+            "",
+            "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Box/glTF/", "Box.gltf",
+            this.sceneTwo,
+            (meshes) => {
+             meshes[0].position = position;
+           //  dummy = this.getParentMesh(meshes[0]);
+             
+             console.log("gltf object loaded : ");
+            }
+          );
+            
+          /*
+           // @ts-ignore
+        gltfObject.onMeshLoadedObservable.addOnce(meshData => {
+          
+      //    this.gltfObjects.push(this.getParentMesh(meshData));
+          console.log("waaat "+meshData);
+          meshData.setEnabled(false);
+          this.addGLTFMesh();
+        });
+         */
           break;
         case ShapeType.Image:
           var planeOpts = {
