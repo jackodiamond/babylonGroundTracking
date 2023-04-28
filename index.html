@@ -196,8 +196,7 @@
                       meshNodeData[i].isVisible=false;
                     }
 
-                    //load the gltf of secene 0 at begining!
-                    this.loadGltfOfScene(0);
+                   
                    // b.isVisible = false;
                 })
         
@@ -337,7 +336,7 @@
         }  
         else
         {
-      //    this.addSceneMesh(element.meshType, this.currentGLTFPosition);
+          this.addSceneMesh(element.meshType, this.currentGLTFPosition);
         
       //  element.mesh.setEnabled(false);
         }
@@ -406,8 +405,7 @@
           return torusKnot;
           break;
         case ShapeType.GLTF:
-              var dummy ;
-             var sceneTwo = new BABYLON.Scene(engine);
+              
           console.log("gltf to be added");
          
          
@@ -416,7 +414,7 @@
           const gltfObject = BABYLON.SceneLoader.ImportMesh(
             "",
             "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Box/glTF/", "Box.gltf",
-            this.scene,
+            this.sceneTwo,
             (meshes) => {
              meshes[0].position = position;
            //  dummy = this.getParentMesh(meshes[0]);
