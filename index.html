@@ -334,7 +334,7 @@
         }  
         else
         {
-          this.addSceneMesh(element.meshType, this.currentGLTFPosition);
+     //     this.addSceneMesh(element.meshType, this.currentGLTFPosition);
         
       //  element.mesh.setEnabled(false);
         }
@@ -423,6 +423,7 @@
           );
             return gltfObject;
           
+              /*
            // @ts-ignore
         gltfObject.onMeshLoadedObservable.addOnce(meshData => {
           
@@ -431,7 +432,7 @@
           meshData.setEnabled(false);
       //    this.addGLTFMesh();
         });
-         
+         */
           break;
         case ShapeType.Image:
           var planeOpts = {
