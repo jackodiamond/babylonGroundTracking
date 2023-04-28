@@ -337,7 +337,7 @@
         }  
         else
         {
-        //  this.addSceneMesh(element.meshType, this.currentGLTFPosition);
+          this.addSceneMesh(element.meshType, this.currentGLTFPosition);
         
       //  element.mesh.setEnabled(false);
         }
@@ -416,7 +416,7 @@
           const gltfObject = BABYLON.SceneLoader.ImportMesh(
             "",
             "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Box/glTF/", "Box.gltf",
-            this.sceneTwo,
+            this.scene,
             (meshes) => {
              meshes[0].position = position;
            //  dummy = this.getParentMesh(meshes[0]);
