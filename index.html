@@ -595,18 +595,20 @@ function fillNodeMeshData() {
              
              var pos = new BABYLON.Vector3(meshObj.position?.x,meshObj.position?.y,meshObj.position?.z);
              
-             const gltfObject = BABYLON.SceneLoader.ImportMesh(
+            BABYLON.SceneLoader.ImportMesh(
             "",
             "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Box/glTF/", "Box.gltf",
             this.scene,
             (meshes) => {
-             meshes[0].position = pos;
+          //   meshes[0].position = pos;
            //  dummy = this.getParentMesh(meshes[0]);
              
              console.log("gltf object loaded : ");
             }
           );
+            
         }
+        
       }
     
   }
