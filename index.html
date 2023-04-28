@@ -195,6 +195,9 @@
                     {
                       meshNodeData[i].isVisible=false;
                     }
+
+                    //load the gltf of secene 0 at begining!
+                    this.loadGltfOfScene(0);
                    // b.isVisible = false;
                 })
         
@@ -334,7 +337,7 @@
         }  
         else
         {
-          this.addSceneMesh(element.meshType, this.currentGLTFPosition);
+        //  this.addSceneMesh(element.meshType, this.currentGLTFPosition);
         
       //  element.mesh.setEnabled(false);
         }
@@ -417,22 +420,21 @@
             (meshes) => {
              meshes[0].position = position;
            //  dummy = this.getParentMesh(meshes[0]);
-            
+             
              console.log("gltf object loaded : ");
             }
           );
-            return gltfObject;
+            return null;
           
-              /*
            // @ts-ignore
         gltfObject.onMeshLoadedObservable.addOnce(meshData => {
           
       //    this.gltfObjects.push(this.getParentMesh(meshData));
           console.log("waaat "+meshData);
           meshData.setEnabled(false);
-      //    this.addGLTFMesh();
+         // this.addGLTFMesh();
         });
-         */
+         
           break;
         case ShapeType.Image:
           var planeOpts = {
@@ -581,6 +583,17 @@ function fillNodeMeshData() {
     }
 
     this.sceneIndex=index-1;
+  }
+
+  function loadGltfOfScene(index)
+  {
+
+    for (let meshObj of scenes[index].meshObjects) {
+         if (meshObj.meshType=="gltf") {
+            console.log("load gltf here!");
+        }
+      }
+    
   }
 
   function enableSceneMesh(value) 
