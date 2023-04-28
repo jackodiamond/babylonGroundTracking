@@ -337,7 +337,7 @@
         }  
         else
         {
-          this.addSceneMesh(element.meshType, this.currentGLTFPosition);
+      //    this.addSceneMesh(element.meshType, this.currentGLTFPosition);
         
       //  element.mesh.setEnabled(false);
         }
@@ -589,8 +589,23 @@ function fillNodeMeshData() {
   {
 
     for (let meshObj of scenes[index].meshObjects) {
+        
          if (meshObj.meshType=="gltf") {
             console.log("load gltf here!");
+             
+             var pos = new BABYLON.Vector3(meshObj.position?.x,meshObj.position?.y,meshObj.position?.z);
+             
+             const gltfObject = BABYLON.SceneLoader.ImportMesh(
+            "",
+            "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Box/glTF/", "Box.gltf",
+            this.scene,
+            (meshes) => {
+             meshes[0].position = pos;
+           //  dummy = this.getParentMesh(meshes[0]);
+             
+             console.log("gltf object loaded : ");
+            }
+          );
         }
       }
     
