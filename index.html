@@ -334,10 +334,8 @@
         }  
         else
         {
-        element.mesh=  this.addSceneMesh(element.meshType, this.currentGLTFPosition);
-        element.mesh.position = new BABYLON.Vector3(element.position?.x*0.4,element.position?.y*0.4,element.position?.z*0.4);
-        element.mesh.rotation = new BABYLON.Vector3(element.rotation?.x,element.rotation?.y,element.rotation?.z);
-        element.mesh.scaling = new BABYLON.Vector3(element.scale?.x*0.4,element.scale?.y*0.4,element.scale?.z*0.4);
+          this.addSceneMesh(element.meshType, this.currentGLTFPosition);
+        
       //  element.mesh.setEnabled(false);
         }
         
@@ -424,16 +422,16 @@
             }
           );
             return gltfObject;
-          /*
+          
            // @ts-ignore
         gltfObject.onMeshLoadedObservable.addOnce(meshData => {
           
       //    this.gltfObjects.push(this.getParentMesh(meshData));
           console.log("waaat "+meshData);
           meshData.setEnabled(false);
-          this.addGLTFMesh();
+      //    this.addGLTFMesh();
         });
-         */
+         
           break;
         case ShapeType.Image:
           var planeOpts = {
