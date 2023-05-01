@@ -418,11 +418,16 @@
             (meshes) => {
              meshes[0].position = position;
            //  dummy = this.getParentMesh(meshes[0]);
-             
+             meshes.forEach(mesh => {
+                  // Do something with mesh here
+                 console.log("gltf disabled");
+                 mesh.isVisible =false;
+                });
+                    
              console.log("gltf object loaded : ");
             }
           );
-            return null;
+            return gltfObject;
           
            // @ts-ignore
         gltfObject.onMeshLoadedObservable.addOnce(meshData => {
