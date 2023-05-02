@@ -57,6 +57,7 @@
         var sceneToRender = null;
         var currentSceneMeshes =[]; 
         var meshNodeData = [];
+        var gltfObjects = [];
         var meshParent;
         var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
         /**
@@ -320,13 +321,15 @@
     scenes = JSON.parse(data);
 
     console.log("a mesh  "+JSON.stringify(scenes));
-
+        var sceneNum =0;
         this.scenes.forEach(element => {
+            gltfObjects.push([]);
+            sceneNum++;
       element.meshObjects.forEach(element => {
         this.currentGLTFPosition = new BABYLON.Vector3(element.position?.x,element.position?.y,element.position?.z);
         if(element.meshType!="gltf")
         {
-        element.mesh= this.addSceneMesh(element.meshType, this.currentGLTFPosition);
+        element.mesh= this.addSceneMesh(element.meshType, this.currentGLTFPosition,sceneNum);
         console.log("z pos"+element.position?.z);
         element.mesh.position = new BABYLON.Vector3(element.position?.x*0.4,element.position?.y*0.4,element.position?.z*0.4);
         element.mesh.rotation = new BABYLON.Vector3(element.rotation?.x,element.rotation?.y,element.rotation?.z);
@@ -336,7 +339,7 @@
         }  
         else
         {
-          this.addSceneMesh(element.meshType, this.currentGLTFPosition);
+          this.addSceneMesh(element.meshType, this.currentGLTFPosition,sceneNum);
         
       //  element.mesh.setEnabled(false);
         }
@@ -353,7 +356,7 @@
 
 
 
-      function addSceneMesh( meshType, position) {
+      function addSceneMesh( meshType, position,sceneNumber) {
         console.log("mesh type : "+meshType);
       switch (meshType) {
         case ShapeType.Sphere:
@@ -422,6 +425,7 @@
                   // Do something with mesh here
                  console.log("gltf disabled");
                  mesh.isVisible =false;
+                 gltfObjects[sceneNumber].push(mesh);
                 });
                     
              console.log("gltf object loaded : ");
