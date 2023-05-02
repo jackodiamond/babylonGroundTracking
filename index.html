@@ -535,13 +535,16 @@ function fillNodeMeshData() {
   console.log("node mesh data filled!");
 }
         
-        function loadSceneNew(index){
+        function loadSceneNew(index) {
             if(index==0)
             {
                 return;
             }
             
             console.log("load scene index : "+index);
+
+            loadGltfOfScene(index-1);
+
            for(let i=0;i<meshNodeData.length;i++)
            {
                 if(i==index-1)
@@ -595,29 +598,19 @@ function fillNodeMeshData() {
   function loadGltfOfScene(index)
   {
 
-    for (let meshObj of scenes[index].meshObjects) {
-        
-         if (meshObj.meshType=="gltf") {
-            console.log("load gltf here!");
-             
-             var pos = new BABYLON.Vector3(meshObj.position?.x,meshObj.position?.y,meshObj.position?.z);
-             
-            BABYLON.SceneLoader.ImportMesh(
-            "",
-            "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Box/glTF/", "Box.gltf",
-            this.scene,
-            (meshes) => {
-          //   meshes[0].position = pos;
-           //  dummy = this.getParentMesh(meshes[0]);
-             
-             console.log("gltf object loaded : ");
-            }
-          );
-            
+    for(var i=0;i<ObjectArray.length;i++)
+    {
+         for(var j=0;j<ObjectArray[i].length;j++)
+        {
+            var element = objectArray[index][i];
+            element.isVisible(false);
         }
-        
-      }
-    
+    }
+
+    for (var i = 0; i < objectArray[index].length; i++) {
+        var element = objectArray[index][i];
+        element.isVisible(true);
+    }
   }
 
   function enableSceneMesh(value) 
