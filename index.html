@@ -600,19 +600,19 @@ function fillNodeMeshData() {
   function loadGltfOfScene(index)
   {
     console.log("load gltf of "+index);
-    for(var i=0;i<ObjectArray.length;i++)
+    for(var i=0;i<gltfObjects.length;i++)
     {
-         for(var j=0;j<ObjectArray[i].length;j++)
+         for(var j=0;j<gltfObjects[i].length;j++)
         {
-            var element = objectArray[i][j];
+            var element = gltfObjects[i][j];
             element.isVisible(false);
         }
     }
     
       console.log("gltf set disabled");
       
-    for (var i = 0; i < objectArray[index].length; i++) {
-        var element = objectArray[index][i];
+    for (var i = 0; i < gltfObjects[index].length; i++) {
+        var element = gltfObjects[index][i];
         element.isVisible(true);
     }
       
