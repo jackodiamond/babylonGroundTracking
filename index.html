@@ -221,15 +221,21 @@
                         marker.isVisible=false;
                     }
                 }
-                console.log("picked mesh "+pickInfo.pickedMesh.name);
+                
                 
                 this.scenes.forEach(element => {
                 element.meshObjects.forEach(element => {
-                        if(pickInfo.pickedMesh.name.includes(element.meshType))
-                       {
-                           console.log("go to scene "+element.actions);
-                           loadSceneNew(parseInt(element.actions));
-                       }
+                        if(pickedInfo.pickedMesh!=null)
+                        {
+                            if(pickedInfo.pickedMesh.name!=null)
+                            {
+                            if(pickInfo.pickedMesh.name.includes(element.meshType))
+                               {
+                                   console.log("go to scene "+element.actions);
+                                   loadSceneNew(parseInt(element.actions));
+                               }
+                            }
+                        }
                     });
                 });
             }
