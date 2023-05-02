@@ -611,7 +611,7 @@ function fillNodeMeshData() {
          for(var j=0;j<gltfObjects[i].length;j++)
         {
             var element = gltfObjects[i][j];
-            element.isVisible(false);
+            element.isVisible=false;
         }
     }
     
@@ -619,7 +619,7 @@ function fillNodeMeshData() {
       
     for (var i = 0; i < gltfObjects[index].length; i++) {
         var element = gltfObjects[index][i];
-        element.isVisible(true);
+        element.isVisible=true;
     }
       
       console.log("gltf set enabled");
