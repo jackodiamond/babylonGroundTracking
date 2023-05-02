@@ -197,6 +197,8 @@
                       meshNodeData[i].isVisible=false;
                     }
 
+                    //loadgltf of scene 1
+                    loadGltfOfScene(0);
                    
                    // b.isVisible = false;
                 })
@@ -597,7 +599,7 @@ function fillNodeMeshData() {
 
   function loadGltfOfScene(index)
   {
-    Debug.Log("load gltf of "+index);
+    console.log("load gltf of "+index);
     for(var i=0;i<ObjectArray.length;i++)
     {
          for(var j=0;j<ObjectArray[i].length;j++)
@@ -607,14 +609,14 @@ function fillNodeMeshData() {
         }
     }
     
-      Debug.Log("gltf set disabled");
+      console.log("gltf set disabled");
       
     for (var i = 0; i < objectArray[index].length; i++) {
         var element = objectArray[index][i];
         element.isVisible(true);
     }
       
-      Debug.Log("gltf set enabled");
+      console.log("gltf set enabled");
   }
 
   function enableSceneMesh(value) 
