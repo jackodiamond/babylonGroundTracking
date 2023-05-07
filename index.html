@@ -525,9 +525,11 @@
           Video.position = vidPos;
           var ANote0VideoMat = new BABYLON.StandardMaterial("m", this.scene);
           VideoTexture = new BABYLON.VideoTexture("babylon", "babylon.mp4", this.scene);
+          
           ANote0VideoMat.diffuseTexture = VideoTexture;
           ANote0VideoMat.roughness = 1;
           ANote0VideoMat.emissiveColor = BABYLON.Color3.White();
+          VideoTexture.video.autoplay=false;
           Video.material = ANote0VideoMat;
           // ANote0VideoVidTex.video.play();
               /*
