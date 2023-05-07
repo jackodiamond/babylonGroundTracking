@@ -58,7 +58,7 @@
         var currentSceneMeshes =[]; 
         var meshNodeData = [];
         var gltfObjects = [];
-        var meshParent;
+        var meshParent, VideoTexture;
         var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
         /**
          * WebXR ar demo using hit-test, anchors, and plane detection.
@@ -229,11 +229,23 @@
                         {
                             if(pickInfo.pickedMesh.name!=null)
                             {
+
+                             console.log("mesh name : "+pickInfo.pickedMesh.name);
+
                             if(pickInfo.pickedMesh.name.includes(element.meshType))
                                {
                                    console.log("go to scene "+element.actions);
                                    loadSceneNew(parseInt(element.actions));
                                }
+
+                            if(pickInfo.pickedMesh.name.includes("Video"))
+                               {
+                                    if (VideoTexture.video.paused)
+                                        VideoTexture.video.play();
+                                    else
+                                        VideoTexture.video.pause();
+                               }
+
                             }
                         }
                     });
@@ -476,12 +488,12 @@
             width: 1,
             sideOrientation: BABYLON.Mesh.DOUBLESIDE
           };
-          var Video = BABYLON.MeshBuilder.CreatePlane("plane", planeOpts, this.scene);
+          var Video = BABYLON.MeshBuilder.CreatePlane("video", planeOpts, this.scene);
           var vidPos = (new BABYLON.Vector3(0, 0, 0.1))
           Video.position = vidPos;
           var ANote0VideoMat = new BABYLON.StandardMaterial("m", this.scene);
-          var ANote0VideoVidTex = new BABYLON.VideoTexture("babylon", "babylon.mp4", this.scene);
-          ANote0VideoMat.diffuseTexture = ANote0VideoVidTex;
+          VideoTexture = new BABYLON.VideoTexture("babylon", "babylon.mp4", this.scene);
+          ANote0VideoMat.diffuseTexture = VideoTexture;
           ANote0VideoMat.roughness = 1;
           ANote0VideoMat.emissiveColor = BABYLON.Color3.White();
           Video.material = ANote0VideoMat;
