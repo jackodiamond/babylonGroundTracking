@@ -249,9 +249,15 @@
                             if(pickInfo.pickedMesh.name.includes("audio"))
                                {
                                     if (audio.paused)
+                                    {
+                                        console.log("audio play");
                                         audio.play();
+                                    }
                                     else
+                                    {
+                                        console.log("audio pause");
                                         audio.pause();
+                                    }
                                }
 
                             }
