@@ -58,7 +58,7 @@
         var currentSceneMeshes =[]; 
         var meshNodeData = [];
         var gltfObjects = [];
-        var meshParent, VideoTexture;
+        var meshParent, VideoTexture, audio;
         var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
         /**
          * WebXR ar demo using hit-test, anchors, and plane detection.
@@ -244,6 +244,14 @@
                                         VideoTexture.video.play();
                                     else
                                         VideoTexture.video.pause();
+                               }
+                                
+                            if(pickInfo.pickedMesh.name.includes("audio"))
+                               {
+                                    if (audio.paused)
+                                        audio.play();
+                                    else
+                                        audio.pause();
                                }
 
                             }
@@ -482,6 +490,30 @@
           Image.material = mat;
           return Image;
           break;
+              
+         case ShapeType.Audio:
+          var planeOpts = {
+            height: 1,
+            width: 1,
+            sideOrientation: BABYLON.Mesh.DOUBLESIDE
+          };
+          var Image = BABYLON.MeshBuilder.CreatePlane("audio", planeOpts, this.scene);
+          var pos = (new BABYLON.Vector3(0, 0, 0.1))
+          Image.position = pos;
+          // texture and material
+          var url = "audio.png";
+          var mat = new BABYLON.StandardMaterial("mat1", this.scene);
+          //mat.backFaceCulling = false;
+          
+          audio = new Audio('violons11.wav');
+              
+          var texture = new BABYLON.Texture(url, this.scene);
+          mat.diffuseTexture = texture;
+            
+          Image.material = mat;
+          return Image;
+          break;
+              
         case ShapeType.Video:
           var planeOpts = {
             height: 1,
