@@ -363,7 +363,7 @@
         this.currentGLTFPosition = new BABYLON.Vector3(element.position?.x,element.position?.y,element.position?.z);
         if(element.meshType!="gltf")
         {
-        element.mesh= this.addSceneMesh(element.meshType, this.currentGLTFPosition,sceneNum);
+        element.mesh= this.addSceneMesh(element.meshType, this.currentGLTFPosition,sceneNum,element.mediaUrl);
         console.log("z pos"+element.position?.z);
         element.mesh.position = new BABYLON.Vector3(element.position?.x*0.4,element.position?.y*0.4,element.position?.z*0.4);
         element.mesh.rotation = new BABYLON.Vector3(element.rotation?.x,element.rotation?.y,element.rotation?.z);
@@ -373,7 +373,7 @@
         }  
         else
         {
-          this.addSceneMesh(element.meshType, this.currentGLTFPosition,sceneNum);
+          this.addSceneMesh(element.meshType, this.currentGLTFPosition,sceneNum,element.mediaUrl);
         
       //  element.mesh.setEnabled(false);
         }
@@ -390,7 +390,7 @@
 
 
 
-      function addSceneMesh( meshType, position,sceneNumber) {
+      function addSceneMesh( meshType, position,sceneNumber,url) {
         console.log("mesh type : "+meshType);
       switch (meshType) {
         case ShapeType.Sphere:
@@ -487,7 +487,7 @@
           var pos = (new BABYLON.Vector3(0, 0, 0.1))
           Image.position = pos;
           // texture and material
-          var url = "https://upload.wikimedia.org/wikipedia/en/8/86/Einstein_tongue.jpg";
+          //var url = "https://upload.wikimedia.org/wikipedia/en/8/86/Einstein_tongue.jpg";
           var mat = new BABYLON.StandardMaterial("mat1", this.scene);
           //mat.backFaceCulling = false;
           var texture = new BABYLON.Texture(url, this.scene);
@@ -511,7 +511,7 @@
           var mat = new BABYLON.StandardMaterial("mat1", this.scene);
           //mat.backFaceCulling = false;
           
-          audio = new Audio('violons11.wav');
+          audio = new Audio(url);
               
           var texture = new BABYLON.Texture(url, this.scene);
           mat.diffuseTexture = texture;
@@ -530,7 +530,7 @@
           var vidPos = (new BABYLON.Vector3(0, 0, 0.1))
           Video.position = vidPos;
           var ANote0VideoMat = new BABYLON.StandardMaterial("m", this.scene);
-          VideoTexture = new BABYLON.VideoTexture("babylon", "babylon.mp4", this.scene);
+          VideoTexture = new BABYLON.VideoTexture("babylon", url, this.scene);
           
           ANote0VideoMat.diffuseTexture = VideoTexture;
           ANote0VideoMat.roughness = 1;
