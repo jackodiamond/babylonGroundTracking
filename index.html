@@ -446,11 +446,18 @@
           console.log("gltf to be added");
          
          
+        const lastSlashIndex = url.lastIndexOf("/");
+        const assetName = url.substring(lastSlashIndex + 1);
+        const restOfUrl = url.substring(0, lastSlashIndex + 1);
 
+        console.log("Asset Name: " + assetName); 
+        console.log("Rest of URL: " + restOfUrl);
+              
+              
               console.log("add");
           const gltfObject = BABYLON.SceneLoader.ImportMesh(
             "",
-            "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Box/glTF/", "Box.gltf",
+            restOfUrl, assetName,
             this.sceneTwo,
             (meshes) => {
              meshes[0].position = position;
