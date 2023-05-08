@@ -445,10 +445,10 @@
               
           console.log("gltf to be added");
          
-         
-        const lastSlashIndex = url.lastIndexOf("/");
-        const assetName = url.substring(lastSlashIndex + 1);
-        const restOfUrl = url.substring(0, lastSlashIndex + 1);
+        let url2 = url.toString();
+        const lastSlashIndex = url2.lastIndexOf("/");
+        const assetName = url2.substring(lastSlashIndex + 1);
+        const restOfUrl = url2.substring(0, lastSlashIndex + 1);
 
         console.log("Asset Name: " + assetName); 
         console.log("Rest of URL: " + restOfUrl);
