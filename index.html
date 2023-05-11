@@ -242,11 +242,10 @@
 
                             if(pickInfo.pickedMesh.name.includes("video"))
                                {
-                                   console.log("abc : "+videos.get(pickInfo.pickedMesh));
-                                    if (videos.get(element.mesh).video.paused)
-                                        videos.get(element.mesh).video.play();
+                                    if (videos.get(pickInfo.pickedMesh).paused)
+                                        videos.get(pickInfo.pickedMesh).play();
                                     else
-                                        videos.get(element.mesh).video.pause();
+                                        videos.get(pickInfo.pickedMesh).pause();
                                }
                                 
                             if(pickInfo.pickedMesh.name.includes("audio"))
@@ -352,7 +351,7 @@
 
 
         function readJson(){
-    var data = '[{"id":1,"name":"Scene 1","meshObjects":[{"id":"2","name":"new video","sceneId":1,"meshType":"Video","isLock":false,"position":{"x":0,"y":0,"z":0.1},"rotation":{"x":0,"y":-1.5,"z":0},"scale":{"x":1,"y":1,"z":1},"mediaUrl":"babylon.mp4","mediaName":"videoplayback.mp4"}],"sceneType":1,"mediaName":"desktop-pc.png","mediaUrl":"/Content/Instancy V2 Folders/2/en-us/078a00f1-e522-4724-b65f-2c8a650da46d.png"}]';
+    var data = '[{"id":1,"name":"Scene 1","meshObjects":[{"id":"2","name":"new video","sceneId":1,"meshType":"video","isLock":false,"position":{"x":0,"y":0,"z":0.1},"rotation":{"x":0,"y":-1.5,"z":0},"scale":{"x":1,"y":1,"z":1},"mediaUrl":"babylon.mp4","mediaName":"videoplayback.mp4"}],"sceneType":1,"mediaName":"desktop-pc.png","mediaUrl":"/Content/Instancy V2 Folders/2/en-us/078a00f1-e522-4724-b65f-2c8a650da46d.png"}]';
     
     
     scenes = JSON.parse(data);
@@ -537,25 +536,18 @@
             width: 1,
             sideOrientation: BABYLON.Mesh.DOUBLESIDE
           };
-              
-          console.log("video 1");
-              
           var Video = BABYLON.MeshBuilder.CreatePlane("video", planeOpts, this.scene);
           var vidPos = (new BABYLON.Vector3(0, 0, 0.1))
           Video.position = vidPos;
           var ANote0VideoMat = new BABYLON.StandardMaterial("m", this.scene);
-          VideoTexture = new BABYLON.VideoTexture("babylonvideoTexture", url, this.scene);
+          VideoTexture = new BABYLON.VideoTexture("babylon", url, this.scene);
           
           ANote0VideoMat.diffuseTexture = VideoTexture;
           ANote0VideoMat.roughness = 1;
           ANote0VideoMat.emissiveColor = BABYLON.Color3.White();
           VideoTexture.video.autoplay=false;
           Video.material = ANote0VideoMat;
-          
-          console.log("video 2");
-          videos.set(Video, VideoTexture);
-          
-          console.log("video 3");
+          videos.set(Video, VideoTexture.video);
           // ANote0VideoVidTex.video.play();
               /*
           this.scene.onPointerObservable.add(function (evt) {
