@@ -242,6 +242,7 @@
 
                             if(pickInfo.pickedMesh.name.includes("video"))
                                {
+                                   console.log("abc : "+videos.get(pickInfo.pickedMesh));
                                     if (videos.get(pickInfo.pickedMesh).video.paused)
                                         videos.get(pickInfo.pickedMesh).video.play();
                                     else
@@ -543,7 +544,7 @@
           var vidPos = (new BABYLON.Vector3(0, 0, 0.1))
           Video.position = vidPos;
           var ANote0VideoMat = new BABYLON.StandardMaterial("m", this.scene);
-          VideoTexture = new BABYLON.VideoTexture("babylon", url, this.scene);
+          VideoTexture = new BABYLON.VideoTexture("babylonvideoTexture", url, this.scene);
           
           ANote0VideoMat.diffuseTexture = VideoTexture;
           ANote0VideoMat.roughness = 1;
