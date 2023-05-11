@@ -243,11 +243,11 @@
                             if(pickInfo.pickedMesh.name.includes("video"))
                                {
                                    console.log("abc : "+videos.get(pickInfo.pickedMesh));
-                                    if (videos.get(pickInfo.pickedMesh).video.paused)
-                                        videos.get(pickInfo.pickedMesh).video.play();
+                                    if (videos.get(element.mesh).video.paused)
+                                        videos.get(element.mesh).video.play();
                                     else
-                                        videos.get(pickInfo.pickedMesh).video.pause();
-                               }
+                                        videos.get(element.mesh).video.pause();
+                               
                                 
                             if(pickInfo.pickedMesh.name.includes("audio"))
                                {
