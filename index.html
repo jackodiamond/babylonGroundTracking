@@ -536,6 +536,9 @@
             width: 1,
             sideOrientation: BABYLON.Mesh.DOUBLESIDE
           };
+              
+          console.log("video 1");
+              
           var Video = BABYLON.MeshBuilder.CreatePlane("video", planeOpts, this.scene);
           var vidPos = (new BABYLON.Vector3(0, 0, 0.1))
           Video.position = vidPos;
@@ -547,7 +550,11 @@
           ANote0VideoMat.emissiveColor = BABYLON.Color3.White();
           VideoTexture.video.autoplay=false;
           Video.material = ANote0VideoMat;
+          
+          console.log("video 2");
           videos.set(Video, VideoTexture.video);
+          
+          console.log("video 3");
           // ANote0VideoVidTex.video.play();
               /*
           this.scene.onPointerObservable.add(function (evt) {
