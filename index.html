@@ -242,10 +242,10 @@
 
                             if(pickInfo.pickedMesh.name.includes("video"))
                                {
-                                    if (videos.get(pickInfo.pickedMesh).paused)
-                                        videos.get(pickInfo.pickedMesh).play();
+                                    if (videos.get(pickInfo.pickedMesh).video.paused)
+                                        videos.get(pickInfo.pickedMesh).video.play();
                                     else
-                                        videos.get(pickInfo.pickedMesh).pause();
+                                        videos.get(pickInfo.pickedMesh).video.pause();
                                }
                                 
                             if(pickInfo.pickedMesh.name.includes("audio"))
@@ -552,7 +552,7 @@
           Video.material = ANote0VideoMat;
           
           console.log("video 2");
-          videos.set(Video, VideoTexture.video);
+          videos.set(Video, VideoTexture);
           
           console.log("video 3");
           // ANote0VideoVidTex.video.play();
