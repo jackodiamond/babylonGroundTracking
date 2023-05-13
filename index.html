@@ -59,8 +59,6 @@
         var meshNodeData = [];
         var gltfObjects = [];
         var meshParent, VideoTexture, audio;
-        var videos = new Map();
-        var audios = new Map();
         var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
         /**
          * WebXR ar demo using hit-test, anchors, and plane detection.
@@ -224,8 +222,6 @@
                     }
                 }
                 
-
-
                 for(let i=0;i<meshNodeData.length;i++)
                 {
                   console.log("tap1");
@@ -239,9 +235,7 @@
                         console.log("tap3 found!");
                       }
                   }
-                  
                 }
-
                 
                 this.scenes.forEach(element => {
                 element.meshObjects.forEach(element => {
@@ -260,23 +254,23 @@
 
                             if(pickInfo.pickedMesh.name.includes("video"))
                                {
-                                    if (videos.get(pickInfo.pickedMesh).paused)
-                                        videos.get(pickInfo.pickedMesh).play();
+                                    if (VideoTexture.video.paused)
+                                        VideoTexture.video.play();
                                     else
-                                        videos.get(pickInfo.pickedMesh).pause();
+                                        VideoTexture.video.pause();
                                }
                                 
                             if(pickInfo.pickedMesh.name.includes("audio"))
                                {
-                                    if (audios.get(pickInfo.pickedMesh).paused)
+                                    if (audio.paused)
                                     {
                                         console.log("audio play");
-                                        audios.get(pickInfo.pickedMesh).play();
+                                        audio.play();
                                     }
                                     else
                                     {
                                         console.log("audio pause");
-                                        audios.get(pickInfo.pickedMesh).pause();
+                                        audio.pause();
                                     }
                                }
 
@@ -369,7 +363,7 @@
 
 
         function readJson(){
-    var data = '[{"id":1,"name":"Scene 1","meshObjects":[{"id":"2","name":"new video","sceneId":1,"meshType":"video","isLock":false,"position":{"x":0,"y":0,"z":0.1},"rotation":{"x":0,"y":-1.5,"z":0},"scale":{"x":1,"y":1,"z":1},"mediaUrl":"babylon.mp4","mediaName":"videoplayback.mp4"}],"sceneType":1,"mediaName":"desktop-pc.png","mediaUrl":"/Content/Instancy V2 Folders/2/en-us/078a00f1-e522-4724-b65f-2c8a650da46d.png"}]';
+    var data = '[{"id":1,"name":"Scene 1","meshObjects":[{"id":"2","name":"new video","sceneId":1,"meshType":"gltf","isLock":false,"position":{"x":0,"y":0,"z":0.1},"rotation":{"x":0,"y":-1.5,"z":0},"scale":{"x":1,"y":1,"z":1},"mediaUrl":"/Content/Instancy V2 Folders/2/en-us/de35e881-ba25-4a07-b985-eb083af9132c.mp4","mediaName":"videoplayback.mp4"}],"sceneType":1,"mediaName":"desktop-pc.png","mediaUrl":"/Content/Instancy V2 Folders/2/en-us/078a00f1-e522-4724-b65f-2c8a650da46d.png"}]';
     
     
     scenes = JSON.parse(data);
@@ -544,7 +538,6 @@
           mat.diffuseTexture = texture;
             
           Image.material = mat;
-          audios.set(Image, audio);
           return Image;
           break;
               
@@ -565,7 +558,6 @@
           ANote0VideoMat.emissiveColor = BABYLON.Color3.White();
           VideoTexture.video.autoplay=false;
           Video.material = ANote0VideoMat;
-          videos.set(Video, VideoTexture.video);
           // ANote0VideoVidTex.video.play();
               /*
           this.scene.onPointerObservable.add(function (evt) {
@@ -727,10 +719,18 @@ function fillNodeMeshData() {
   }
 
 
-    // Resize
-    window.addEventListener("resize", function () {
-        engine.resize();
-    });
+
+
+
+
+
+
+
+
+        // Resize
+        window.addEventListener("resize", function () {
+            engine.resize();
+        });
 
         const ShapeType ={
   Sphere: 'sphere',
