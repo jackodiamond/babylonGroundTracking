@@ -224,6 +224,24 @@
                     }
                 }
                 
+
+
+                for(let i=0;i<meshNodeData.length;i++)
+                {
+                  console.log("tap1");
+                  const children = meshNodeData[i].getChildren();
+                  for (let j = 0; j < children.length; j++) 
+                  {
+                    console.log("tap2");
+                      const child = children[j];
+                      if(pickInfo.pickedMesh == child)
+                      {
+                        console.log("tap3 found!");
+                      }
+                  }
+                  
+                }
+
                 
                 this.scenes.forEach(element => {
                 element.meshObjects.forEach(element => {
@@ -709,18 +727,10 @@ function fillNodeMeshData() {
   }
 
 
-
-
-
-
-
-
-
-
-        // Resize
-        window.addEventListener("resize", function () {
-            engine.resize();
-        });
+    // Resize
+    window.addEventListener("resize", function () {
+        engine.resize();
+    });
 
         const ShapeType ={
   Sphere: 'sphere',
