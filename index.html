@@ -59,6 +59,9 @@
         var meshNodeData = [];
         var gltfObjects = [];
         var meshParent, VideoTexture, audio;
+        var videos = new Map();
+        var audios = new Map();
+        var copyMap = new Map();
         var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
         /**
          * WebXR ar demo using hit-test, anchors, and plane detection.
@@ -232,6 +235,27 @@
                       const child = children[j];
                       if(pickInfo.pickedMesh == child)
                       {
+                        if(pickInfo.pickedMesh.name.includes("video"))
+                           {
+                                if (videos.get(copyMap.get(child)).video.paused)
+                                    videos.get(copyMap.get(child)).video.play();
+                                else
+                                    videos.get(copyMap.get(child)).video.pause();
+                           }
+                                
+                        if(pickInfo.pickedMesh.name.includes("audio"))
+                           {
+                                if (audios.get(copyMap.get(child)).paused)
+                                {
+                                    console.log("audio play");
+                                    audios.get(copyMap.get(child)).play();
+                                }
+                                else
+                                {
+                                    console.log("audio pause");
+                                    audios.get(copyMap.get(child)).pause();
+                                }
+                           }
                         console.log("tap3 found!");
                       }
                   }
@@ -252,6 +276,7 @@
                                    loadSceneNew(parseInt(element.actions));
                                }
 
+                                /*
                             if(pickInfo.pickedMesh.name.includes("video"))
                                {
                                     if (VideoTexture.video.paused)
@@ -273,6 +298,7 @@
                                         audio.pause();
                                     }
                                }
+                                */
 
                             }
                         }
@@ -536,7 +562,7 @@
               
           var texture = new BABYLON.Texture(url, this.scene);
           mat.diffuseTexture = texture;
-            
+          audios.set(Image, audio);  
           Image.material = mat;
           return Image;
           break;
@@ -558,6 +584,7 @@
           ANote0VideoMat.emissiveColor = BABYLON.Color3.White();
           VideoTexture.video.autoplay=false;
           Video.material = ANote0VideoMat;
+          videos.set(Video, VideoTexture);
           // ANote0VideoVidTex.video.play();
               /*
           this.scene.onPointerObservable.add(function (evt) {
@@ -608,6 +635,8 @@ function fillNodeMeshData() {
         meshCopy.parent = meshNodeData[i];
         meshObj.mesh.setEnabled(false);
         meshCopy.isVisible=false;
+        copyMap.set(meshCopy, meshObj.mesh);  
+          
       }
     }
       meshNodeData[i].parent = meshParent;
