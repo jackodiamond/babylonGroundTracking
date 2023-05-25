@@ -638,8 +638,14 @@
 function fillNodeMeshData() {
     meshParent = BABYLON.MeshBuilder.CreateCylinder('cylinder', { diameterBottom: 0, diameterTop: 0, height: 0.5 });
   for (let i = 0; i < scenes.length; i++) {
+      
+    if(sceneIndex-1!=i)
+    {
+      continue;
+    }
+      
     let a = BABYLON.MeshBuilder.CreateCylinder('cylinder', { diameterBottom: 0, diameterTop: 0, height: 0.5 });
-    meshNodeData[i] = a;
+    meshNodeData[0] = a;
 
     for (let meshObj of scenes[i].meshObjects) {
       console.log("mesh name" + meshObj.name);
@@ -648,15 +654,15 @@ function fillNodeMeshData() {
         console.log("mesh exists "+meshObj.mesh.name);
         let meshCopy = meshObj.mesh.clone(meshObj.mesh.name + "_copy");
      //   meshCopy.position = new BABYLON.Vector3(0, 0, 0);
-        meshCopy.parent = meshNodeData[i];
+        meshCopy.parent = meshNodeData[0];
         meshObj.mesh.setEnabled(false);
         meshCopy.isVisible=false;
         copyMap.set(meshCopy, meshObj.mesh);  
           
       }
     }
-      meshNodeData[i].parent = meshParent;
-      meshNodeData[i].isVisible=false;
+      meshNodeData[0].parent = meshParent;
+      meshNodeData[0].isVisible=false;
   }
   console.log("node mesh data filled!");
 }
