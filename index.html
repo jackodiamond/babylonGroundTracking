@@ -406,13 +406,13 @@
 
             if(sceneIndex-1!=sceneNum)
             {
-              continue;
+              return;
             }
 
             if(element.sceneType != 2)
             {
               console.log("scene type is not ground tracking!");
-              continue;
+              return;
             }
 
       element.meshObjects.forEach(element => {
