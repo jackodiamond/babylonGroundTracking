@@ -50,6 +50,7 @@
             });
         }
 
+        var sceneIndex =2;
         var engine = null;
         var scene = null;
         var sceneTwo;
@@ -396,9 +397,24 @@
 
     console.log("a mesh  "+JSON.stringify(scenes));
         var sceneNum =-1;
+        
+        
+
         this.scenes.forEach(element => {
             gltfObjects.push([]);
             sceneNum++;
+
+            if(sceneIndex-1!=sceneNum)
+            {
+              continue;
+            }
+
+            if(element.sceneType != 2)
+            {
+              console.log("scene type is not ground tracking!");
+              continue;
+            }
+
       element.meshObjects.forEach(element => {
         this.currentGLTFPosition = new BABYLON.Vector3(element.position?.x,element.position?.y,element.position?.z);
         if(element.meshType!="gltf")
