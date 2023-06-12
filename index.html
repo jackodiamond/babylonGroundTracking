@@ -618,8 +618,8 @@
           break;
 
         case ShapeType.Text:
-            var advancedTexture = AdvancedDynamicTexture.CreateFullscreenUI("UI");
-            var input = new InputText();
+            var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
+            var input = new BABYLON.GUI.InputText();
             input.width = 0.2;
             input.maxWidth = 0.2;
             input.height = "40px";
@@ -631,8 +631,8 @@
           break;
 
         case ShapeType.Button:
-            var advancedTexture = AdvancedDynamicTexture.CreateFullscreenUI("UI");
-            var button1 = Button.CreateSimpleButton("but1", "Click Me");
+            var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
+            var button1 = BABYLON.GUI.Button.CreateSimpleButton("but1", "Click Me");
             button1.width = "150px"
             button1.height = "40px";
             button1.color = "white";
