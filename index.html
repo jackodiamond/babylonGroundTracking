@@ -417,7 +417,7 @@
 
       element.meshObjects.forEach(element => {
         this.currentGLTFPosition = new BABYLON.Vector3(element.position?.x,element.position?.y,element.position?.z);
-        if(element.meshType!="gltf")
+        if(element.meshType!="gltf" &&element.meshType!="text" && element.meshType!="button")
         {
         element.mesh= this.addSceneMesh(element.meshType, this.currentGLTFPosition,sceneNum,element.mediaUrl);
         console.log("z pos"+element.position?.z);
