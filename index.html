@@ -618,28 +618,35 @@
           break;
 
         case ShapeType.Text:
-            var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
-            var input = new BABYLON.GUI.InputText();
-            input.width = 0.2;
-            input.maxWidth = 0.2;
-            input.height = "40px";
-            input.text = "Sample Text";
-            input.color = "white";
-            input.background = "green";
-            advancedTexture.addControl(input);
-            return advancedTexture;
+             // Create 3D text
+          var text = "Hello, Babylon.js!";
+          var font = "36px Arial";
+          var color = "white";
+          var backgroundColor = "transparent";
+          var textureText = new BABYLON.DynamicTexture("textTexture", 512, this.scene, true);
+          textureText.hasAlpha = true;
+          textureText.drawText(text, null, null, font, color, backgroundColor, true);
+
+          // Create a plane to apply the texture
+          var plane = BABYLON.MeshBuilder.CreatePlane("plane", { size: 2 }, this.scene);
+          var material = new BABYLON.StandardMaterial("material", this.scene);
+          material.diffuseTexture = textureText;
+          plane.material = material;
+          return plane;
           break;
 
         case ShapeType.Button:
-            var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
-            var button1 = BABYLON.GUI.Button.CreateSimpleButton("but1", "Click Me");
-            button1.width = "150px"
-            button1.height = "40px";
-            button1.color = "white";
-            button1.cornerRadius = 20;
-            button1.background = "green";
-            advancedTexture.addControl(button1);
-            return advancedTexture;
+            // Define the dimensions of the cuboid
+          var width = 2;    // User-defined width
+          var height = 1;   // User-defined height
+          var depth = 0.1;    // User-defined depth
+
+          // Create the cuboid mesh
+          var btn = BABYLON.MeshBuilder.CreateBox("cuboid", { size: width }, this.scene);
+          btn.scaling.y = height / width;
+          btn.scaling.z = depth / width;
+          console.log('button Added: ', btn)
+          return btn;
           break;
       }
       console.log('Meshes List: ', this.currentSceneMeshes);
