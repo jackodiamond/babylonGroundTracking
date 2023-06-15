@@ -63,6 +63,7 @@
         var videos = new Map();
         var audios = new Map();
         var copyMap = new Map();
+        var label;
         var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
         /**
          * WebXR ar demo using hit-test, anchors, and plane detection.
@@ -419,6 +420,11 @@
         this.currentGLTFPosition = new BABYLON.Vector3(element.position?.x,element.position?.y,element.position?.z);
         if(element.meshType!="gltf" )
         {
+
+        if(element.meshType=="text")
+        {
+            this.label = element.label;
+        }
         element.mesh= this.addSceneMesh(element.meshType, this.currentGLTFPosition,sceneNum,element.mediaUrl);
         console.log("z pos"+element.position?.z);
         element.mesh.position = new BABYLON.Vector3(element.position?.x*0.4,element.position?.y*0.4,element.position?.z*0.4);
@@ -619,7 +625,7 @@
 
         case ShapeType.Text:
              // Create 3D text
-          var text = "Hello, Babylon.js!";
+          var text = this.label;
           var font = "36px Arial";
           var color = "white";
           var backgroundColor = "transparent";
