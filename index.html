@@ -50,7 +50,7 @@
             });
         }
 
-        var sceneIndex =2;
+        var sceneIndex =1;
         var engine = null;
         var scene = null;
         var sceneTwo;
@@ -63,12 +63,6 @@
         var videos = new Map();
         var audios = new Map();
         var copyMap = new Map();
-
-        var hotspotNodeMap = new Map();
-        var hotspotBoolMap = new Map();
-        var optionState = new Map();
-
-        var label;
         var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
         /**
          * WebXR ar demo using hit-test, anchors, and plane detection.
@@ -187,11 +181,8 @@
                     }
                     */
                  //   anchor.attachedNode = b;//b.clone("mensch");
-
-                    if(meshNodeData[0])
-                    {
-                        meshNodeData[0].isVisible=true;
-                    }
+                    
+                    meshNodeData[0].isVisible=true;
                  //   anchor.attachedNode = meshNodeData[0];
                     anchor.attachedNode = meshParent;
                     
@@ -400,8 +391,8 @@
 
         function readJson(){
     var data = '[{"id":1,"name":"Scene 1","meshObjects":[{"id":"7","name":"new sphere","sceneId":1,"meshType":"text","isLock":false,"position":{"x":0,"y":0.9001209735870361,"z":-1.5484981536865234},"rotation":{"x":0,"y":0,"z":0},"scale":{"x":1.5,"y":1.5,"z":1.5},"mediaName":"Sphere","actionData":{}},{"id":"5","name":"new capsule","sceneId":1,"meshType":"button","isLock":false,"position":{"x":0,"y":1.246681571006775,"z":0.7380901575088501},"rotation":{"x":0,"y":0,"z":0},"scale":{"x":1.5,"y":1.5,"z":1.5},"mediaName":"cube","label":"my text","actionData":{}}],"sceneType":2,"mediaName":"desktop-pc.png","mediaUrl":"../content/media/2/en-us/078a00f1-e522-4724-b65f-2c8a650da46d.png"}]';
-   
- //   var data = '[{"id":1,"name":"Scene 1","meshObjects":[{"id":"0","name":"new hotspot","sceneId":1,"meshType":"hotspot","isLock":false,"position":{"x":-2.940396308898926,"y":0,"z":0.30851754546165466},"rotation":{"x":0,"y":-1.5000000818206223,"z":0},"scale":{"x":1,"y":1,"z":1},"mediaUrl":"assets/img/round-shap/index1.svg","actionType":"Multiple Correct","actionData":{"addHotspotQuestion":{"question":"how are you?","backgroundColor":"#fafafa","transparency":0,"questionColor":"#ffffff","questionBgColor":"#1c1c1c","answerColor":"#000000","feedbackIfCorrect":"","feedbackIfIncorrect":"incorrect answer","selectedAns":[],"allOptions":[{"title":"In this example, we create a Babylon.js scene with an ArcRotateCamera","value":false},{"title":"option 2","value":false}]}}}],"sceneType":1}]';
+    
+    
     scenes = JSON.parse(data);
 
     console.log("a mesh  "+JSON.stringify(scenes));
@@ -428,11 +419,6 @@
         this.currentGLTFPosition = new BABYLON.Vector3(element.position?.x,element.position?.y,element.position?.z);
         if(element.meshType!="gltf" )
         {
-
-        if(element.meshType=="text")
-        {
-            this.label = element.label;
-        }
         element.mesh= this.addSceneMesh(element.meshType, this.currentGLTFPosition,sceneNum,element.mediaUrl);
         console.log("z pos"+element.position?.z);
         element.mesh.position = new BABYLON.Vector3(element.position?.x*0.4,element.position?.y*0.4,element.position?.z*0.4);
@@ -441,14 +427,11 @@
         element.mesh.setEnabled(false);
         console.log("");
         }  
-        else if(element.meshType=="gltf" )
+        else
         {
           this.addSceneMesh(element.meshType, this.currentGLTFPosition,0,element.mediaUrl);
         
       //  element.mesh.setEnabled(false);
-        }else if(element.meshType=="hotspot" )
-        {
-          element.mesh=  this.addHotspot(element);
         }
         
       });
@@ -460,264 +443,6 @@
 
 
         }
-
-
-function addHotspot(meshData)
-{
-    var planeOpts = {
-      height:1,
-      width: 4,
-      sideOrientation: Mesh.DOUBLESIDE
-    };
-    var hotspot = MeshBuilder.CreateCylinder('cylinder', { height: 0.01, diameter: 1 }, this.scene);
-    
-    hotspot.rotation.z = 90;
-
-    console.log("rtotaion "+hotspot.rotation);
-
-    var mat = new StandardMaterial("mat1", this.scene);
-    var texture = new Texture(meshData.mediaUrl, this.scene);
-    mat.diffuseTexture = texture; 
-
-    hotspot.material = mat;
-
-    // Parent TransformNode
-    var parent = new TransformNode("parent", this.scene);
-
-    switch(meshData.actionType)
-    {
-      case (ActionType.LinkScene):
-      //fix editor 
-      break;
-
-      case (ActionType.LinkURL):
-      //nothing to do here, redirect to url on click
-      break;
-
-      case (ActionType.DisplayMessage):
-      // Create 3D text
-      var text = meshData.actionData.displayMassage.dmsg;
-      var font = "36px Arial";
-      var color = "white";
-      var backgroundColor = "transparent";
-      var textureText = new DynamicTexture("textTexture", 512, this.scene, true);
-      textureText.hasAlpha = true;
-      textureText.drawText(text, null, null, font, color, backgroundColor, true);
-
-      // Create a plane to apply the texture
-      var plane = MeshBuilder.CreatePlane("plane", { size: 2 }, this.scene);
-      var material = new StandardMaterial("material", this.scene);
-      material.diffuseTexture = textureText;
-      plane.material = material;
-
-      console.log("text added");
-
-      plane.position.y = hotspot.position.y+1;
-
-      plane.parent = parent;
-      break;
-
-      case (ActionType.addImage):
-        var planeOpts = {
-          height: 5.4762,
-          width: 7.3967,
-          sideOrientation: Mesh.DOUBLESIDE
-        };
-        var Image = MeshBuilder.CreatePlane("plane", planeOpts, this.scene);
-        var pos = (new Vector3(0, 0, 0.1))
-        Image.position = pos;
-        // texture and material
-        //var url = "http://upload.wikimedia.org/wikipedia/en/8/86/Einstein_tongue.jpg";
-        var mat = new StandardMaterial("mat1", this.scene);
-        //mat.backFaceCulling = false;
-        var texture = new Texture(meshData.actionData.image.url, this.scene);
-        mat.diffuseTexture = texture;
-  
-        Image.material = mat;
-        Image.parent=parent;
-      break;
-
-      case (ActionType.addVideo):
-        var planeOpts = {
-            height: 5.4762,
-            width: 7.3967,
-            sideOrientation: Mesh.DOUBLESIDE
-          };
-          var Video = MeshBuilder.CreatePlane("plane", planeOpts, this.scene);
-          var vidPos = (new Vector3(0, 0, 0.1))
-          Video.position = vidPos;
-          var ANote0VideoMat = new StandardMaterial("m", this.scene);
-          var ANote0VideoVidTex = new VideoTexture("babylon", meshData.actionData.video.url, this.scene);
-          ANote0VideoMat.diffuseTexture = ANote0VideoVidTex;
-          ANote0VideoMat.roughness = 1;
-          ANote0VideoVidTex.video.autoplay=false;
-          ANote0VideoMat.emissiveColor = Color3.White();
-          Video.material = ANote0VideoMat;
-          
-          this.scene.onPointerObservable.add(function (evt) {
-            if (evt.pickInfo?.pickedMesh === Video) {
-              //console.log("picked");
-              if (ANote0VideoVidTex.video.paused)
-                ANote0VideoVidTex.video.play();
-              else
-                ANote0VideoVidTex.video.pause();
-              console.log(ANote0VideoVidTex.video.paused ? "paused" : "playing");
-            }
-          }, PointerEventTypes.POINTERPICK);
-          Video.parent=parent;
-      break;
-
-      case (ActionType.multiQuestion || ActionType.singleCorrect || ActionType.trueFalse):
-          // Create 3D text
-          var text = meshData.actionData.addHotspotQuestion.question;
-          var font = "36px Arial";
-          var color = "white";
-          var backgroundColor = "transparent";
-          var textureText = new DynamicTexture("textTexture", 512, this.scene, true);
-          textureText.hasAlpha = true;
-          textureText.drawText(text, null, null, font, color, backgroundColor, true);
-
-          // Create a plane to apply the texture
-          var plane = MeshBuilder.CreatePlane("plane", { size: 2 }, this.scene);
-          var material = new StandardMaterial("material", this.scene);
-          material.diffuseTexture = textureText;
-          plane.material = material;
-
-          console.log("text added");
-
-          plane.position.y = hotspot.position.y+1;
-
-          plane.parent = parent;
-
-          //add option
-          console.log("options "+meshData.actionData.addHotspotQuestion.allOptions.length);
-
-          meshData.actionData.addHotspotQuestion.allOptions.forEach((option, index) => {
-            console.log(`Option ${index + 1}:`);
-            console.log("Title:", option.title);
-            console.log("Value:", option.value);
-
-            // Create 3D text
-            var text = option.title;
-            var font = "36px Arial";
-            var color = "white";
-            var backgroundColor = "transparent";
-            var textureText = new DynamicTexture("textTexture", 512, this.scene, true);
-            textureText.hasAlpha = true;
-            textureText.drawText(text, null, null, font, color, backgroundColor, true);
-
-            // Create a plane to apply the texture
-            var plane = MeshBuilder.CreatePlane("plane", { size: 2 }, this.scene);
-            var material = new StandardMaterial("material", this.scene);
-            material.diffuseTexture = textureText;
-            plane.material = material;
-            plane.position.y = hotspot.position.y+1-(index+1)*0.25;
-            plane.parent = parent;
-
-            //create option button
-            var optionButton = MeshBuilder.CreateCylinder('cylinder', { height: 0.01, diameter: 0.15 }, this.scene);
-          
-            optionButton.rotation.x = -70* Math.PI / 180;
-            optionButton.position.x = -1;
-            optionButton.position.y = hotspot.position.y+1-(index+1)*0.25;
-        
-            console.log("rtotaion "+hotspot.rotation);
-        
-            var mat = new StandardMaterial("mat1", this.scene);
-            var texture = new Texture("assets/uncheck.png", this.scene);
-            mat.diffuseTexture = texture; 
-        
-            optionButton.material = mat;
-            optionButton.parent = parent;
-            this.optionState.set(optionButton,false);
-            this.scene.onPointerObservable.add( (evt) => {
-              if (evt.pickInfo?.pickedMesh === optionButton) {
-               if(this.optionState.get(optionButton)==false)
-               {
-                this.optionState.set(optionButton,true);
-
-                var texture = new Texture("assets/check.png", this.scene);
-                mat.diffuseTexture = texture; 
-        
-                optionButton.material = mat;
-               
-               }else
-               {
-                this.optionState.set(optionButton,false);
-
-                var texture = new Texture("assets/uncheck.png", this.scene);
-                mat.diffuseTexture = texture; 
-            
-                optionButton.material = mat;
-               }
-                console.log("option clicked");
-              }
-            }, PointerEventTypes.POINTERPICK);
-
-            if(index+1==meshData.actionData.addHotspotQuestion.allOptions.length)
-            {
-              var planeOpts = {
-                height: 0.2, 
-                width: 0.6,
-                sideOrientation: Mesh.DOUBLESIDE
-              };
-              var Image = MeshBuilder.CreatePlane("plane", planeOpts, this.scene);
-
-              var texture = new Texture("assets/submit.png", this.scene);
-              var mat2 = new StandardMaterial("mat1", this.scene);
-              mat2.diffuseTexture = texture; 
-            
-              Image.material = mat2;
-
-              Image.position.x = 1;
-              Image.position.y = hotspot.position.y+1-(index+2)*0.25; 
-
-              this.scene.onPointerObservable.add( (evt) => {
-                if (evt.pickInfo?.pickedMesh === Image) {
-                 
-                  console.log("submit clicked");
-                   // Create 3D text
-                  var text = meshData.actionData.addHotspotQuestion.feedbackIfIncorrect;
-                  var font = "36px Arial";
-                  var color = "white";
-                  var backgroundColor = "transparent";
-                  var textureText = new DynamicTexture("textTexture", 512, this.scene, true);
-                  textureText.hasAlpha = true;
-                  textureText.drawText(text, null, null, font, color, backgroundColor, true);
-
-                  // Create a plane to apply the texture
-                  var plane = MeshBuilder.CreatePlane("plane", { size: 2 }, this.scene);
-                  var material = new StandardMaterial("material", this.scene);
-                  material.diffuseTexture = textureText;
-                  plane.material = material;
-                  plane.position.y = hotspot.position.y+1;
-                  plane.rotation.y = -90*Math.PI/180;
-
-                  setTimeout(function() {
-                    plane.visibility = 0; // Set visibility to 0 to hide the mesh
-                  }, 5000);
-                  
-                  parent.setEnabled(false);
-                }
-              }, PointerEventTypes.POINTERPICK);
-
-              Image.parent = parent;
-
-
-            }
-          });
-      break;
-      
-    }
-
-
-    parent.rotation.y = 80;
-
-    parent.setEnabled(false);
-    this.hotspotBoolMap.set(hotspot,false);
-    this.hotspotNodeMap.set(hotspot,parent);
-    return hotspot;
-  }
 
 
 
@@ -825,7 +550,7 @@ function addHotspot(meshData)
           var pos = (new BABYLON.Vector3(0, 0, 0.1))
           Image.position = position;
           // texture and material
-          var url = "https://upload.wikimedia.org/wikipedia/en/8/86/Einstein_tongue.jpg";
+          //var url = "https://upload.wikimedia.org/wikipedia/en/8/86/Einstein_tongue.jpg";
           var mat = new BABYLON.StandardMaterial("mat1", this.scene);
           //mat.backFaceCulling = false;
           var texture = new BABYLON.Texture(url, this.scene);
@@ -894,7 +619,7 @@ function addHotspot(meshData)
 
         case ShapeType.Text:
              // Create 3D text
-          var text = this.label;
+          var text = "Hello, Babylon.js!";
           var font = "36px Arial";
           var color = "white";
           var backgroundColor = "transparent";
