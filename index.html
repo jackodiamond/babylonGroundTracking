@@ -187,8 +187,11 @@
                     }
                     */
                  //   anchor.attachedNode = b;//b.clone("mensch");
-                    
-                    meshNodeData[0].isVisible=true;
+
+                    if(meshNodeData[0])
+                    {
+                        meshNodeData[0].isVisible=true;
+                    }
                  //   anchor.attachedNode = meshNodeData[0];
                     anchor.attachedNode = meshParent;
                     
