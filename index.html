@@ -627,6 +627,7 @@
             optionButton.material = mat;
             optionButton.parent = parent;
             this.optionState.set(optionButton,false);
+              /*
             this.scene.onPointerObservable.add( (evt) => {
               if (evt.pickInfo?.pickedMesh === optionButton) {
                if(this.optionState.get(optionButton)==false)
@@ -650,7 +651,7 @@
                 console.log("option clicked");
               }
             }, PointerEventTypes.POINTERPICK);
-
+            */
             if(index+1==meshData.actionData.addHotspotQuestion.allOptions.length)
             {
               var planeOpts = {
@@ -669,6 +670,7 @@
               Image.position.x = 1;
               Image.position.y = hotspot.position.y+1-(index+2)*0.25; 
 
+                /*
               this.scene.onPointerObservable.add( (evt) => {
                 if (evt.pickInfo?.pickedMesh === Image) {
                  
@@ -697,7 +699,7 @@
                   parent.setEnabled(false);
                 }
               }, PointerEventTypes.POINTERPICK);
-
+                */
               Image.parent = parent;
 
 
