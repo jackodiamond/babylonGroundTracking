@@ -300,7 +300,10 @@
                             if(pickInfo.pickedMesh.name.includes(element.meshType))
                                {
                                    console.log("go to scene "+element.actions);
+                                   if (!isNaN(parseInt(element.actions)))
+                                   {
                                    loadSceneNew(parseInt(element.actions));
+                                   }
                                }
 
                                 /*
