@@ -239,6 +239,29 @@
                       const child = children[j];
                       if(pickInfo.pickedMesh == child)
                       {
+                          
+                        if(pickInfo.pickedMesh.name.includes("hotspot"))
+                        {
+                           var parentNode = this.hotspotNodeMap.get(element.mesh);
+            
+                          console.log("hotspot found! "+parentNode);
+                          
+                          if(this.hotspotBoolMap.get(element.mesh))
+                          {
+                            console.log("enabled");
+                            
+                            parentNode?.setEnabled(false);
+                            this.hotspotBoolMap.set(element.mesh,false)
+                            
+                          }else
+                          {
+                            console.log("not enabled");
+                            parentNode?.setEnabled(true);
+                            this.hotspotBoolMap.set(element.mesh,true)
+                          }
+                        }
+
+                          
                         if(pickInfo.pickedMesh.name.includes("video"))
                            {
                                 if (videos.get(copyMap.get(child)).video.paused)
@@ -466,7 +489,7 @@
       width: 4,
       sideOrientation: BABYLON.Mesh.DOUBLESIDE
     };
-    var hotspot = BABYLON.MeshBuilder.CreateCylinder('cylinder', { height: 0.01, diameter: 1 }, this.scene);
+    var hotspot = BABYLON.MeshBuilder.CreateCylinder('hotspot', { height: 0.01, diameter: 1 }, this.scene);
     
     hotspot.rotation.z = 90;
 
