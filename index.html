@@ -242,22 +242,22 @@
                           
                         if(pickInfo.pickedMesh.name.includes("hotspot"))
                         {
-                           var parentNode = this.hotspotNodeMap.get(element.mesh);
+                           var parentNode = this.hotspotNodeMap.get(pickInfo.pickedMesh);
             
                           console.log("hotspot found! "+parentNode);
                           
-                          if(this.hotspotBoolMap.get(element.mesh))
+                          if(this.hotspotBoolMap.get(pickInfo.pickedMesh))
                           {
                             console.log("enabled");
                             
                             parentNode?.setEnabled(false);
-                            this.hotspotBoolMap.set(element.mesh,false)
+                            this.hotspotBoolMap.set(pickInfo.pickedMesh,false)
                             
                           }else
                           {
                             console.log("not enabled");
                             parentNode?.setEnabled(true);
-                            this.hotspotBoolMap.set(element.mesh,true)
+                            this.hotspotBoolMap.set(pickInfo.pickedMesh,true)
                           }
                         }
 
